@@ -1,0 +1,97 @@
+/**
+ * base.css — Design Tokens, CSS Reset, Typography.
+ * Single source of truth for all design variables.
+ * No component styles here — only tokens and global resets.
+ */
+
+:root {
+  /* ── Color Palette ─────────────────────────────────────── */
+  --bg-base:      #080d1a;
+  --bg-surface:   #0d1529;
+  --bg-card:      rgba(13, 21, 41, 0.72);
+  --border:       rgba(56, 189, 248, 0.18);
+  --border-glow:  rgba(56, 189, 248, 0.55);
+
+  --accent-cyan:   #38bdf8;
+  --accent-teal:   #2dd4bf;
+  --accent-violet: #a78bfa;
+  --accent-amber:  #fbbf24;
+  --accent-rose:   #fb7185;
+  --accent-green:  #4ade80;
+
+  --text-primary: #e2e8f0;
+  --text-muted:   #94a3b8;
+  --text-dim:     #475569;
+
+  /* ── Shadows / Glows ───────────────────────────────────── */
+  --glow-cyan:   0 0 24px rgba(56, 189, 248, 0.45);
+  --glow-teal:   0 0 24px rgba(45, 212, 191, 0.45);
+  --glow-violet: 0 0 24px rgba(167, 139, 250, 0.45);
+
+  /* ── Spacing Scale ─────────────────────────────────────── */
+  --space-xs:  0.4rem;
+  --space-sm:  0.75rem;
+  --space-md:  1rem;
+  --space-lg:  1.5rem;
+  --space-xl:  2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 5rem;
+
+  /* ── Border Radius Scale ───────────────────────────────── */
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   14px;
+  --radius-xl:   16px;
+  --radius-2xl:  20px;
+  --radius-pill: 100px;
+
+  /* ── Typography ────────────────────────────────────────── */
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* ── Reset ─────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-sans);
+  background:  var(--bg-base);
+  color:       var(--text-primary);
+  min-height:  100vh;
+  overflow-x:  hidden;
+  line-height: 1.5;
+}
+
+/* ── Typography ────────────────────────────────────────────── */
+h1, h2, h3, h4 {
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* Inline code — reused across views */
+code {
+  font-family: var(--font-mono);
+  font-size:   0.85em;
+  background:  rgba(56, 189, 248, 0.08);
+  color:       var(--accent-cyan);
+  padding:     0.1rem 0.35rem;
+  border-radius: var(--radius-sm);
+}
+
+/* ── Scroll-reveal utility ─────────────────────────────────── */
+/* Class applied by AnimationHelper.createScrollFadeObserver() */
+.fade-up {
+  opacity:   0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-up.visible {
+  opacity:   1;
+  transform: translateY(0);
+}

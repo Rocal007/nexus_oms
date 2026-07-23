@@ -1,0 +1,33 @@
+/**
+ * flowmap.css — SVG flow map section container.
+ * Animated SVG line classes reference keyframes from animations.css.
+ */
+
+.flowmap-section {
+  margin-bottom: var(--space-3xl);
+}
+
+.flowmap-container {
+  background:         var(--bg-card);
+  border:             1px solid var(--border);
+  border-radius:      var(--radius-2xl);
+  padding:            var(--space-xl);
+  backdrop-filter:    blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  overflow-x:         auto;
+}
+
+.flowmap-svg-wrap {
+  min-width: 900px;
+}
+
+/* ── SVG animated dash classes (applied via SVGBuilder attrs) ─ */
+.svg-flow-line {
+  stroke-dasharray: 6, 4;
+  animation: svg-dash 1.5s linear infinite;
+}
+
+.svg-flow-line--back {
+  stroke-dasharray: 6, 4;
+  animation: svg-dash-back 2s linear infinite;
+}

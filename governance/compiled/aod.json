@@ -1,0 +1,786 @@
+{
+  "version": "3.0.0",
+  "principles": [
+    {
+      "filename": "core_axioms.md",
+      "content": "# Core Axioms (Logic DNA)\n**ID:** AOD-PRN-001  \n**Version:** 3.0.0  \n**Status:** Active  \n**Author:** DECORUM-NEXUS System Architecture  \n\nThis document defines the core logical DNA and algebraic operator specifications governing all semantic inference and transformation processes.\n\n---\n\n## 1. System Operator Axiom\nThe NEXUS system is defined as a composite operator \\( T: X \\to X \\) acting upon the semantic state space \\( X = (i, o, r, p) \\):\n\\[ T = C \\circ P_J \\circ D_L \\circ F \\]\nWhere:\n*   \\( F \\): Probabilistic LLM Generator Operator (generates semantic candidates).\n*   \\( D_L \\): Legislative DECORUM Projection Operator (enforces regulatory and style constraints).\n*   \\( P_J \\): Judicative Proof-Validator Operator (verifies factuality and compliance).\n*   \\( C \\): Idempotent Cache Operator (stabilizes and seals the verified state).\n\n## 2. Radical Objectivity Inference (RO)\nAll client-facing outputs are subject to strict decorum filtering:\n\\[ Output = \\text{Inference}(\\text{Input}, \\text{Location}, \\text{Service}) \\circ \\text{DECORUM\\_Filter} \\]\n\n## 3. Content Purity Law\nContent must strictly consist of verified geodata, active legal frameworks, and validated database facts. Generic or hyperbolic prose is strictly forbidden:\n\\[ Content = \\{x \\mid x \\in (\\text{Facts} \\cup \\text{Geodata} \\cup \\text{Law}_{2026}) \\land x \\notin \\text{Generic\\_Prose}\\} \\]\n\n## 4. Conversion Synchronization\nValue token weight optimization is mapped by:\n\\[ Token_{Value} = \\sum (\\text{AIDA}_{Stage} + \\text{CTA}_{Strength}) \\]\n\n## 5. Regional Dialect Locality\nRegional dialects and vocabulary selections are geocentrically routed:\n\\[ Language_{Dialect} = f(\\text{Location}, \\text{Cultural\\_Context}) \\]\n\n## 6. Prompt Master Formula\nMaster prompting construction follows:\n\\[ H_p = c_{\\text{style}} \\cdot \\Big( BR \\odot BP(B, M) \\Big) \\times \\Big( L + B + \\Psi \\rightarrow M \\Big) \\]\nWith:\n*   \\( L = \\{l_{\\text{geo}}, l_{\\text{char}}, l_{\\text{vibe}}\\} \\to \\) (Geografie, Key-Feature, Atmosphäre)\n*   \\( B = \\{b_{\\text{niche}}, b_{\\text{target}}\\} \\to \\) (Genaue Marktnische, Zielgruppe)\n*   \\( M = \\{m_{\\text{action}}, m_{\\text{funnel}}\\} \\to \\) (Gewünschte Aktion, Funnel-Phase)\n*   \\( \\Psi = \\{\\psi_{\\text{trigger}}, \\psi_{\\text{bias}}\\} \\to \\) (Emotionaler Hebel, kognitiver Bias)\n*   \\( BR = \\{br_{\\text{colors}}, br_{\\text{style}}, br_{\\text{assets}}\\} \\to \\) (Farbpalette, Style, Branding-Elemente)\n*   \\( BP(B, M) = \\text{Search}\\Big(\\text{Trends}(b_{\\text{niche}}) \\cap \\text{Conversion-Rate}(m_{\\text{action}})\\Big) \\)\n\n## 7. Visual Supremacy Integration\nThe generated asset \\( I = \\mathcal{V}_{\\text{design}}(H_p) \\) is a dependent variable of the main supremacy equation:\n\\[ V_{\\text{NEXUS}} = f(I) \\]\n*   Within \\( Sind_i \\): Technical image performance parameter \\( Sind_{\\text{image}}(I) \\) (LCP, WebP sizing).\n*   Within \\( \\Omega_{\\text{RO}}(L, J) \\): Aesthetic and regulatory compliance vector \\( \\Omega_{\\text{RO, visual}}(I) \\) satisfying \\( q_{\\text{composition}} \\) and \\( q_{\\text{integrity}} \\) within the limit \\( \\lim_{\\Delta_{\\text{CoP}} \\to 0} \\).\n"
+    },
+    {
+      "filename": "stability_theory.md",
+      "content": "# Stability & Convergence Theory\n**ID:** AOD-PRN-002  \n**Version:** 3.0.0  \n**Status:** Active  \n**Author:** DECORUM-NEXUS System Architecture  \n\nThis document outlines the stability, convergence, and thermodynamic complexity bounds of the NEXUS System Operator.\n\n---\n\n## 1. Fixpoint Conditions\nA system state \\( X^* \\) is a system fixpoint of NEXUS if and only if:\n\\[ T(X^*) = X^* \\]\n\n### Lemma 1: Idempotency of DECORUM in Stable State\nIf \\( X \\) is conflict-free with respect to the Legislative rules (\\( \\Phi(X) = \\emptyset \\)), then:\n\\[ D_L(X) = X \\]\n*Beweis:* Because no violations of constraints exist, projecting the state onto the legislative compliance subspace is a trivial identity mapping.\n\n### Lemma 2: Cache Idempotency\nThe cache operator \\( C \\) is idempotent:\n\\[ C(C(X)) = C(X) \\]\n*Beweis:* The cache only seals states that have already been validated. Applying the cache operator a second time results in zero state mutations.\n\n---\n\n## 2. Convergence Theorems\n\n### Theorem 1: Convergence of NEXUS\nLet \\( X \\) be a compact semantical space, and let \\( D_L \\) be a contractive projection with a contraction constant \\( k < 1 \\). Then the iterative process:\n\\[ X_{t+1} = T(X_t) \\]\nconverges to a unique fixpoint \\( X^* \\).\n\n*Beweis:*\n1. The stochastic generator \\( F \\) yields a bounded set of candidate states.\n2. The DECORUM projection \\( D_L \\) maps these candidates onto the legal compliance subspace, contracting the semantic variance.\n3. The Proof-Validator \\( P_J \\) rejects non-conforming states.\n4. The Cache \\( C \\) seals states falling within the semantic tolerance threshold \\( \\epsilon \\).\nHence, \\( T \\) is a contraction mapping. By the Banach Fixed-Point Theorem, the iteration converges to a unique, stable fixpoint \\( X^* \\).\n\n### Theorem 2: Cache Stability Theorem\nLet \\( X_t, X_{t+k} \\in X \\). If:\n\\[ P_J(X_t) = 1 \\land P_J(X_{t+k}) = 1 \\quad \\text{and} \\quad \\Delta(X_t, X_{t+k}) \\le \\epsilon \\]\nthen:\n\\[ C(X_{t+k}) = C(X_t) \\]\n*Beweis:* Since both states are verified as compliant by the Judicative operator and lie within the semantic error bound \\( \\epsilon \\), they map to the same equivalence class in the cache store.\n\n---\n\n## 3. Complexity & Thermodynamic Bounds\n\n### Theorem 3: Complexity Reduction Theorem\nLet \\( h \\in [0, 1] \\) be the cache hit rate. The expected computational complexity \\( E[T] \\) for a system iteration is:\n\\[ E[T] = (1 - h) \\cdot O(F) + O(C) \\]\n*Corollary:* As \\( h \\to 1 \\), the computational cost converges to the cache lookup cost:\n\\[ \\lim_{h \\to 1} E[T] = O(C) \\]\nThis renders the heavy LLM generator execution \\( O(F) \\) asymptotically irrelevant under stable conditions.\n\n### Theorem 4: Stability Fixpoint\nEvery stable state where \\( \\Delta(X_t, X_{t+1}) \\le \\epsilon \\land P_J(X_t) = 1 \\) is a fixpoint of \\( T \\).\n*Beweis:* Under these conditions, the DECORUM projection performs an identity mapping, the Cache accepts the state, and the generative LLM operator \\( F \\) is bypassed, resulting in \\( T(X) = X \\).\n"
+    },
+    {
+      "filename": "visibility_vector.md",
+      "content": "# Visibility Vector & Search Supremacy\n**ID:** AOD-PRN-003  \n**Version:** 3.0.0  \n**Status:** Active  \n**Author:** DECORUM-NEXUS System Architecture  \n\nThis document details the search visibility equations and page quality scoring models (Q_NEXUS V2).\n\n---\n\n## 1. Search Supremacy Equation\nThe total search visibility (\\( V_{\\text{NEXUS}} \\)) under the constraint of Radical Objectivity (RO) is calculated as:\n\\[ V_{\\text{NEXUS}} = \\left[ \\sum_{i} (Sind_i \\cdot Walg_i) \\right] \\cdot \\lim_{\\Delta_{\\text{CoP}} \\to 0} \\left( \\frac{\\Omega_{\\text{RO}}(L, J)}{\\Delta_{\\text{CoP}}(J) + \\epsilon} \\right) \\]\n\nWhere:\n*   \\( V_{\\text{NEXUS}} \\): Total search engine ranking visibility.\n*   \\( Sind_i \\): Syntactic SEO elements (e.g., HTML5 semantics, JSON-LD schemas, Core Web Vitals).\n*   \\( Walg_i \\): Search engine algorithmic weight factor for syntactic element \\( i \\).\n*   \\( \\Omega_{\\text{RO}} \\): Radical Objectivity truth kernel, defined by the tensor product of Legislative and Judicative compliance:\n    \\[ \\Omega_{\\text{RO}}(L, J) = \\Phi(L) \\otimes \\Psi(J) \\]\n*   \\( \\Delta_{\\text{CoP}} \\): Chain-of-Proof thermodynamic friction (hallucination or manipulation rate). The Judicative validation forces this friction to zero:\n    \\[ \\lim_{J \\to \\infty} \\Delta_{\\text{CoP}} = 0 \\]\n*   \\( \\epsilon \\): Algorithmic jitter and search engine fluctuation noise.\n\n---\n\n## 2. Q_NEXUS V2 Quality Score\nThe build compiler (FACTORIUM) must calculate and store a normalized quality score for every page:\n\\[ Q_{NEXUS} = w_1 \\cdot S + w_2 \\cdot V + w_3 \\cdot L + w_4 \\cdot (S \\cdot V \\cdot L) \\]\nWith the weight constraint:\n\\[ \\sum w_i = 1 \\]\n\n### Component Variables:\n*   **S (Syntax Score)**: Normalized technical score (HTML5 semantic hierarchy, JSON-LD correctness) in range \\([0, 1]\\).\n*   **V (Verification Score)**: Verification correctness against the database and legal rules (Judicative checks) in range \\([0, 1]\\).\n*   **L (Lupos Score)**: Neurodidactic readability and user interaction metric (e.g., Flesch Reading Ease, click telemetry) in range \\([0, 1]\\).\n*   **\\( S \\cdot V \\cdot L \\)**: Synergistic interaction term rewarding harmonious optimization across technology, truth, and psychology.\n"
+    }
+  ],
+  "rules": [
+    {
+      "id": "AOD-RULE-001",
+      "name": "Architecture First",
+      "version": "3.0.0",
+      "status": "Approved",
+      "normative_level": "Mandatory",
+      "priority": "Critical",
+      "owner": "System Architect",
+      "purpose": "Enforces strict architectural boundaries to avoid spaghetti code and technical debt.",
+      "statement": "All code modules must follow the defined system folder hierarchy (Axiom, Nexus, Visium, Factorium, Command) and maintain strict isolation.",
+      "rationale": "Ensures the application remains clean, modular, and easy to maintain over thousands of generated pages.",
+      "scope": "Codebase-wide",
+      "validation": "Verified via eslint import rules and automated architecture reviews (AOD-CL-001).",
+      "violations": "Build block and pull request rejection.",
+      "dependencies": []
+    },
+    {
+      "id": "AOD-RULE-002",
+      "name": "Business First",
+      "version": "3.0.0",
+      "status": "Approved",
+      "normative_level": "Mandatory",
+      "priority": "High",
+      "owner": "Product Manager",
+      "purpose": "Focuses development and text generation efforts on generating conversions and business value.",
+      "statement": "All user interfaces and copy must optimize the conversion funnel, providing clear actions (CTAs) and eliminating distraction.",
+      "rationale": "The primary business goal of the platform is lead generation and user conversion.",
+      "scope": "Frontend and content generation",
+      "validation": "AIDA stage checks and conversion sync analysis (AOD-DM-005).",
+      "violations": "Revision of generated texts and layout adjustments.",
+      "dependencies": [
+        "AOD-RULE-001"
+      ]
+    },
+    {
+      "id": "AOD-RULE-003",
+      "name": "Knowledge First",
+      "version": "3.0.0",
+      "status": "Approved",
+      "normative_level": "Mandatory",
+      "priority": "Critical",
+      "owner": "Knowledge Engineer",
+      "purpose": "Eliminates AI hallucinations and ensures high-fidelity data input.",
+      "statement": "No company metadata, addresses, license keys, or tax IDs may be hardcoded or fabricated by AI. All data must come from authenticated databases.",
+      "rationale": "Fabricating legal entities or contact information violates Austrian law and breaks customer trust.",
+      "scope": "Content generation, databases",
+      "validation": "Axiomatic validation checks (AOD-CL-005).",
+      "violations": "Immediate build termination.",
+      "dependencies": [
+        "AOD-RULE-001"
+      ]
+    },
+    {
+      "id": "AOD-RULE-004",
+      "name": "Radical Objectivity (DECORUM)",
+      "version": "3.0.0",
+      "status": "Approved",
+      "normative_level": "Mandatory",
+      "priority": "High",
+      "owner": "Editor in Chief",
+      "purpose": "Maintains formal, objective, and information-dense copywriting style.",
+      "statement": "All marketing fluff, emotional adjectives, and hyperbolic language (e.g., 'innovativ', 'zuverlässig') must be stripped from generated pages.",
+      "rationale": "Factual, information-dense pages score higher with both search crawlers and analytical decision-makers.",
+      "scope": "Text generation",
+      "validation": "DECORUM projection filtering during build runtime.",
+      "violations": "Text filter failures and regeneration requirements.",
+      "dependencies": [
+        "AOD-RULE-003"
+      ]
+    },
+    {
+      "id": "AOD-RULE-005",
+      "name": "Legal Compliance",
+      "version": "3.0.0",
+      "status": "Approved",
+      "normative_level": "Mandatory",
+      "priority": "Critical",
+      "owner": "Legal Counsel",
+      "purpose": "Ensures absolute legal compliance under Austrian law.",
+      "statement": "Generated texts must comply with local trade laws (GewO 1994) and waste management acts (AWG 2002). For example, unauthorized firms cannot promise 'Entsorgung' in Austria.",
+      "rationale": "Non-compliant text leads to heavy regulatory fines and commercial lawsuits.",
+      "scope": "Content generation, marketing",
+      "validation": "Judicative check against restricted vocabulary databases and GISA records.",
+      "violations": "Immediate build abort.",
+      "dependencies": [
+        "AOD-RULE-003",
+        "AOD-RULE-004"
+      ]
+    },
+    {
+      "id": "AOD-RULE-006",
+      "name": "Regional-Linguistic Adaptation (LINGUA-LOCA)",
+      "version": "3.0.0",
+      "status": "Approved",
+      "normative_level": "Mandatory",
+      "priority": "High",
+      "owner": "Localization Lead",
+      "purpose": "Ensures generated text feels native to the targeted location.",
+      "statement": "Replace generic high-German terms with regional Austrian words (e.g., 'Räumung/Entrümpelung', 'Spedition' instead of 'Haushaltsauflösung', 'Umzugsunternehmen').",
+      "rationale": "Improves conversion by building regional trust and matches local search engine queries.",
+      "scope": "Text generation",
+      "validation": "LINGUA-LOCAL adaptation operator (AOD-PRN-001).",
+      "violations": "Revision of generated keywords.",
+      "dependencies": [
+        "AOD-RULE-004",
+        "AOD-RULE-005"
+      ]
+    },
+    {
+      "id": "AOD-RULE-007",
+      "name": "Structural Siloing & Geocentric Linking",
+      "version": "3.0.0",
+      "status": "Approved",
+      "normative_level": "Mandatory",
+      "priority": "High",
+      "owner": "SEO Architect",
+      "purpose": "Controls the PageRank flow and internal link budget.",
+      "statement": "Automated link generation must group pages into tight local silos (e.g., matching municipalities under a certain geographical distance theta).",
+      "rationale": "Prevents link diluting and channels crawler budget into relevant localized regional pages.",
+      "scope": "Build compiler, routing",
+      "validation": "Link-siloing graph formula evaluation (AOD-PRN-001).",
+      "violations": "Dangling links warning, build abort on cross-silo bleed.",
+      "dependencies": [
+        "AOD-RULE-001"
+      ]
+    },
+    {
+      "id": "AOD-RULE-008",
+      "name": "Neurodidactic UI (VFB-Model)",
+      "version": "3.0.0",
+      "status": "Approved",
+      "normative_level": "Mandatory",
+      "priority": "Medium",
+      "owner": "UX Designer",
+      "purpose": "Maximizes cognitive alignment and user comprehension.",
+      "statement": "UIs must structure text into digestible, associated chunks (KAWA/KAGA) with strong visual anchors and interactive gamification features.",
+      "rationale": "Improves reading speeds and session duration, leading to a higher user action multiplier.",
+      "scope": "Frontend Layouts",
+      "validation": "VFB-Model active network formula evaluation (AOD-PRN-001).",
+      "violations": "Layout adjustments required.",
+      "dependencies": [
+        "AOD-RULE-002"
+      ]
+    },
+    {
+      "id": "AOD-RULE-009",
+      "name": "Dual Cognitive Resonance",
+      "version": "3.0.0",
+      "status": "Approved",
+      "normative_level": "Mandatory",
+      "priority": "Medium",
+      "owner": "UX Designer",
+      "purpose": "Addresses both intuitive and analytical cognitive routes of users.",
+      "statement": "Provide high cognitive fluency for System 1 (speed, familiar layouts) and verified fact sheets and trust certificates for System 2 (rational checking).",
+      "rationale": "Friction triggers System 2 suspicion; lack of facts prevents System 2 confirmation.",
+      "scope": "Frontend and copywriting",
+      "validation": "Human behavior validation logs.",
+      "violations": "Conversion drop warning.",
+      "dependencies": [
+        "AOD-RULE-008"
+      ]
+    },
+    {
+      "id": "AOD-RULE-010",
+      "name": "Harmonious Visual Composition (Visium 60-30-10)",
+      "version": "3.0.0",
+      "status": "Approved",
+      "normative_level": "Mandatory",
+      "priority": "High",
+      "owner": "UI Designer",
+      "purpose": "Ensures visual beauty, branding structure, and high contrast.",
+      "statement": "UIs must apply 60% dominant background (contrast compliant), 30% brand color, and 10% action color reserved strictly for CTAs.",
+      "rationale": "Maintains clear hierarchy, satisfies accessibility (WCAG 2.2), and drives conversion via isolation effects.",
+      "scope": "CSS and UI generation",
+      "validation": "Lighthouse accessibility audit and automated CSS verification.",
+      "violations": "Styling corrections and build warning.",
+      "dependencies": [
+        "AOD-RULE-001",
+        "AOD-RULE-002"
+      ]
+    },
+    {
+      "id": "AOD-RULE-011",
+      "name": "Agnostic Gamification Routing (LUDUS Protocol)",
+      "version": "3.0.0",
+      "status": "Approved",
+      "normative_level": "Mandatory",
+      "priority": "Medium",
+      "owner": "UX Architect",
+      "purpose": "Matches interface gamification elements with the user's emotional state.",
+      "statement": "Route industries into LUDUS classes: High-Anxiety gets Control widgets; Goal-Oriented gets Calculators; Desire-Driven gets Reward animations.",
+      "rationale": "Aligns interface feedback with user psychology, preventing inappropriate playfulness in high-stress situations.",
+      "scope": "Frontend UI and copywriting",
+      "validation": "LUDUS routing evaluation and telemetry (AOD-PRN-002).",
+      "violations": "Layout adjustments.",
+      "dependencies": [
+        "AOD-RULE-002",
+        "AOD-RULE-008"
+      ]
+    },
+    {
+      "id": "AOD-RULE-012",
+      "name": "Disjoint Mock-ID Isolation (Legal Shield)",
+      "version": "3.0.0",
+      "status": "Approved",
+      "normative_level": "Mandatory",
+      "priority": "High",
+      "owner": "Data Compliance Officer",
+      "purpose": "Avoids legal liability by preventing intersection of synthetic and real IDs.",
+      "statement": "All fictions (mock licenses, plates, addresses) generated for demo or placeholder UI must be strictly disjoint from real registrated entities.",
+      "rationale": "Prevents accidental copy of active real companies, avoiding trademark infringements.",
+      "scope": "Mock generator, content pipelines",
+      "validation": "Mathematical intersection checks (AOD-PRN-002) and registry searches.",
+      "violations": "Immediate file generation blocking.",
+      "dependencies": [
+        "AOD-RULE-003",
+        "AOD-RULE-005"
+      ]
+    },
+    {
+      "id": "AOD-RULE-013",
+      "name": "Deterministic Factorium Execution",
+      "version": "3.0.0",
+      "status": "Approved",
+      "normative_level": "Mandatory",
+      "priority": "High",
+      "owner": "DevOps Engineer",
+      "purpose": "Minimizes compilation waste and prevents accidental mass-rebuilds.",
+      "statement": "Building pages must be isolated to targeted entities by default (using environment variable BUILD_ENTITY) rather than building all sites simultaneously.",
+      "rationale": "Prevents API quota limits, saves CPU cycles, and keeps deployment pipelines fast.",
+      "scope": "DevOps, build pipeline",
+      "validation": "Check environment parameters before compile execution.",
+      "violations": "Immediate build termination.",
+      "dependencies": [
+        "AOD-RULE-001"
+      ]
+    },
+    {
+      "id": "AOD-RULE-014",
+      "name": "Script-Free SSG Purity",
+      "version": "3.0.0",
+      "status": "Approved",
+      "normative_level": "Mandatory",
+      "priority": "Critical",
+      "owner": "Front-End Lead",
+      "purpose": "Delivers top-tier page performance (Lighthouse 100) and indexing capabilities.",
+      "statement": "Generated static pages must contain zero runtime Javascript scripts, relying purely on HTML5 semantic tags and vanilla CSS layouts.",
+      "rationale": "Zero-JS pages load instantly on all client devices, bypass script execution blockers, and are fully indexable by search bots.",
+      "scope": "Frontend output",
+      "validation": "Automated scan of build outputs check for tag '<script>' (excluding analytical trackers if white-listed).",
+      "violations": "Build block and deployment halt.",
+      "dependencies": [
+        "AOD-RULE-001",
+        "AOD-RULE-013"
+      ]
+    },
+    {
+      "id": "AOD-RULE-015",
+      "name": "Offline-Capable Local Bunker",
+      "version": "3.0.0",
+      "status": "Approved",
+      "normative_level": "Mandatory",
+      "priority": "Medium",
+      "owner": "System Architect",
+      "purpose": "Ensures operational durability and data security.",
+      "statement": "All build operations, database read/writes, and template evaluations must run locally (localhost) without relying on live external APIs.",
+      "rationale": "Ensures the system functions during connectivity outages and keeps private business data from leaking online.",
+      "scope": "System Architecture",
+      "validation": "Offline mock test executions.",
+      "violations": "Security warning and deployment review.",
+      "dependencies": [
+        "AOD-RULE-001",
+        "AOD-RULE-003"
+      ]
+    },
+    {
+      "id": "AOD-RULE-016",
+      "name": "Anti-Rate-Limiting Jitter",
+      "version": "3.0.0",
+      "status": "Approved",
+      "normative_level": "Mandatory",
+      "priority": "Medium",
+      "owner": "Automation Engineer",
+      "purpose": "Avoids IP blocking and API access throttling.",
+      "statement": "Automated API requests (e.g., Vertex AI, geocoding) must inject random human-mimicking delay intervals (250ms - 800ms) and cool-downs.",
+      "rationale": "Prevents remote servers from identifying and blocking automated crawlers or compilers.",
+      "scope": "API client layers",
+      "validation": "Time logging and rate audits.",
+      "violations": "Build delay warning.",
+      "dependencies": [
+        "AOD-RULE-015"
+      ]
+    },
+    {
+      "id": "AOD-RULE-017",
+      "name": "Secure Remote SSH Sync",
+      "version": "3.0.0",
+      "status": "Approved",
+      "normative_level": "Mandatory",
+      "priority": "High",
+      "owner": "DevOps Engineer",
+      "purpose": "Guarantees safe and rapid delivery of static builds to deployment servers.",
+      "statement": "Deployment syncs must use rsync via secure SSH tunnels. Only delta differences are sent, and commands must execute under cryptographic signatures.",
+      "rationale": "Minimizes security breach risks, prevents bandwidth waste, and locks down execution privileges.",
+      "scope": "Deployment, Infrastructure",
+      "validation": "SSH handshake audits and public key verification.",
+      "violations": "Immediate deployment abort.",
+      "dependencies": [
+        "AOD-RULE-001",
+        "AOD-RULE-014"
+      ]
+    },
+    {
+      "id": "AOD-RULE-018",
+      "name": "Axiomatic Hallucination Shield",
+      "version": "3.0.0",
+      "status": "Approved",
+      "normative_level": "Mandatory",
+      "priority": "Critical",
+      "owner": "QA Engineer",
+      "purpose": "Ensures no incorrect, mock, or placeholder data is pushed to live servers.",
+      "statement": "Every static build output must run through pre-flight validation rules (checking GISA presence, spelling errors, 404 links, and structure alignment).",
+      "rationale": "Automated checks serve as the last guardrail to catch AI errors before they reach search spiders or users.",
+      "scope": "Build pipeline, QA",
+      "validation": "Integrity validation suite run.",
+      "violations": "Immediate deployment abort.",
+      "dependencies": [
+        "AOD-RULE-003",
+        "AOD-RULE-013"
+      ]
+    },
+    {
+      "id": "AOD-RULE-019",
+      "name": "Context Window Efficiency",
+      "version": "3.0.0",
+      "status": "Approved",
+      "normative_level": "Mandatory",
+      "priority": "Medium",
+      "owner": "AI Coordinator",
+      "purpose": "Minimizes API usage token costs and increases prompt execution speed.",
+      "statement": "Agents must practice delta-prompting (only sending changes or delta contexts) rather than copying full files or complete setups repeatedly.",
+      "rationale": "Reduces LLM context inflation, avoids token limit bottlenecks, and keeps inference pricing under budget.",
+      "scope": "Developer prompts, agent tasks",
+      "validation": "Prompt size audit.",
+      "violations": "System warning and prompt refactoring request.",
+      "dependencies": [
+        "AOD-RULE-001"
+      ]
+    },
+    {
+      "id": "AOD-RULE-020",
+      "name": "Adaptive Worker Allocation",
+      "version": "3.0.0",
+      "status": "Approved",
+      "normative_level": "Mandatory",
+      "priority": "Medium",
+      "owner": "DevOps Engineer",
+      "purpose": "Ensures optimal resource utilization during mass page compilations.",
+      "statement": "Task allocation to parallel compiler workers must evaluate current machine capacity and worker queue length before dispatching build tasks.",
+      "rationale": "Prevents process starvation, resource congestion, and excessive CPU throttling on static builds.",
+      "scope": "Build compiler, Worker Pool",
+      "validation": "Check system load metrics and task dispatch queue logs.",
+      "violations": "Build delay warning and queue throttling.",
+      "dependencies": [
+        "AOD-RULE-013"
+      ]
+    }
+  ],
+  "workflows": [
+    {
+      "id": "AOD-WF-001",
+      "name": "AI Boot",
+      "version": "3.0.0",
+      "status": "Approved",
+      "steps": [
+        "Extract operational directives from the global settings.",
+        "Bind specific agent persona based on task intent.",
+        "Initialize the secure local session environment."
+      ],
+      "inputs": [
+        "User Intent",
+        "Config Manifest"
+      ],
+      "outputs": [
+        "Active Session Context",
+        "Role Binding"
+      ],
+      "rules_used": [
+        "AOD-RULE-001",
+        "AOD-RULE-003"
+      ]
+    },
+    {
+      "id": "AOD-WF-002",
+      "name": "Knowledge Loading",
+      "version": "3.0.0",
+      "status": "Approved",
+      "steps": [
+        "Query SQLite pool.db and laws.db for active entities.",
+        "Load target locations and verify coordinates.",
+        "Inject legal frameworks and GISA parameters into local context."
+      ],
+      "inputs": [
+        "Entity Config",
+        "Location Database"
+      ],
+      "outputs": [
+        "Loaded Fact Context"
+      ],
+      "rules_used": [
+        "AOD-RULE-003",
+        "AOD-RULE-005"
+      ]
+    },
+    {
+      "id": "AOD-WF-003",
+      "name": "Context Building",
+      "version": "3.0.0",
+      "status": "Approved",
+      "steps": [
+        "Compute geographical distances using the Haversine formula.",
+        "Fetch and parse Wikipedia summaries for target locations.",
+        "Extract population numbers and coat of arms details via Gemini."
+      ],
+      "inputs": [
+        "Loaded Fact Context",
+        "Regional Metrics"
+      ],
+      "outputs": [
+        "Enriched Context Payload"
+      ],
+      "rules_used": [
+        "AOD-RULE-003",
+        "AOD-RULE-006"
+      ]
+    },
+    {
+      "id": "AOD-WF-004",
+      "name": "Analysis",
+      "version": "3.0.0",
+      "status": "Approved",
+      "steps": [
+        "Map user search terms to target niche services.",
+        "Run regional tariff evaluations and industry routing.",
+        "Extract key visual theme requirements based on market standards."
+      ],
+      "inputs": [
+        "Enriched Context Payload",
+        "Search Intent"
+      ],
+      "outputs": [
+        "SEO Intent Matching",
+        "Target Demographics"
+      ],
+      "rules_used": [
+        "AOD-RULE-002",
+        "AOD-RULE-004"
+      ]
+    },
+    {
+      "id": "AOD-WF-005",
+      "name": "Architecture Review",
+      "version": "3.0.0",
+      "status": "Approved",
+      "steps": [
+        "Scan import statements for layer isolation breaches.",
+        "Verify that no presentation components make database calls.",
+        "Ensure target directory structures match defined standard folders."
+      ],
+      "inputs": [
+        "Source Directory",
+        "Code Structure"
+      ],
+      "outputs": [
+        "Architecture Conformance Status"
+      ],
+      "rules_used": [
+        "AOD-RULE-001",
+        "AOD-RULE-014"
+      ]
+    },
+    {
+      "id": "AOD-WF-006",
+      "name": "Decisions",
+      "version": "3.0.0",
+      "status": "Approved",
+      "steps": [
+        "Evaluate population counts against the 10,000 threshold.",
+        "Allocate Template C (heavy interactive) or Template D (lean visual).",
+        "Resolve the LUDUS emotional category and visual colors."
+      ],
+      "inputs": [
+        "Enriched Context Payload",
+        "Niche Classification"
+      ],
+      "outputs": [
+        "Selected Template Mode",
+        "UI Component Configuration"
+      ],
+      "rules_used": [
+        "AOD-RULE-010",
+        "AOD-RULE-011"
+      ]
+    },
+    {
+      "id": "AOD-WF-007",
+      "name": "Implementation",
+      "version": "3.0.0",
+      "status": "Approved",
+      "steps": [
+        "Trigger entity-scoped Next.js compilation.",
+        "Inject human-mimicking delay jitter to prevent quota errors.",
+        "Write compiled script-free HTML and vanilla CSS to the output folder."
+      ],
+      "inputs": [
+        "UI Component Configuration",
+        "Clean Fact Data"
+      ],
+      "outputs": [
+        "Generated Zero-JS Static Files"
+      ],
+      "rules_used": [
+        "AOD-RULE-013",
+        "AOD-RULE-014"
+      ]
+    },
+    {
+      "id": "AOD-WF-008",
+      "name": "Quality Assurance",
+      "version": "3.0.0",
+      "status": "Approved",
+      "steps": [
+        "Validate output files against the Axiomatic Hallucination Shield.",
+        "Check for active legal disclosures, spellings, and 404 links.",
+        "Run Lighthouse audit checks for performance metrics."
+      ],
+      "inputs": [
+        "Generated Zero-JS Static Files",
+        "Legal Requirements"
+      ],
+      "outputs": [
+        "Pre-Flight Validation Report"
+      ],
+      "rules_used": [
+        "AOD-RULE-005",
+        "AOD-RULE-018"
+      ]
+    },
+    {
+      "id": "AOD-WF-009",
+      "name": "Knowledge Preservation",
+      "version": "3.0.0",
+      "status": "Approved",
+      "steps": [
+        "Calculate semantic delta hashes of the compiled output.",
+        "If difference is below epsilon, store output in cache database.",
+        "Update sitemaps and indexing priorities based on cache state."
+      ],
+      "inputs": [
+        "Pre-Flight Validation Report",
+        "Output File Hashes"
+      ],
+      "outputs": [
+        "Updated Build Cache Database"
+      ],
+      "rules_used": [
+        "AOD-RULE-012",
+        "AOD-RULE-015"
+      ]
+    },
+    {
+      "id": "AOD-WF-010",
+      "name": "Delivery",
+      "version": "3.0.0",
+      "status": "Approved",
+      "steps": [
+        "Establish secure SSH tunnel connections to remote VPS hosts.",
+        "Execute rsync differential copy of static build exports.",
+        "Trigger post-sync actions like Nginx server reloads."
+      ],
+      "inputs": [
+        "Updated Build Cache Database",
+        "SSH Target Config"
+      ],
+      "outputs": [
+        "Synchronized Production Environment"
+      ],
+      "rules_used": [
+        "AOD-RULE-015",
+        "AOD-RULE-017"
+      ]
+    }
+  ],
+  "checklists": [
+    {
+      "id": "AOD-CL-001",
+      "name": "Architecture Review",
+      "version": "3.0.0",
+      "status": "Approved",
+      "items": [
+        "Verify all output files contain zero client-side scripts.",
+        "Check that no database calls bleed into presentation components.",
+        "Enforce strict isolation of Axiom, Nexus, Visium, and Factorium folder structures."
+      ]
+    },
+    {
+      "id": "AOD-CL-002",
+      "name": "Security Review",
+      "version": "3.0.0",
+      "status": "Approved",
+      "items": [
+        "Check that all API keys and secrets are loaded from local environment files.",
+        "Verify SSH keys have strict permissions and are stored in secure directories.",
+        "Confirm no external CDN or asset leaks (fonts, CSS) violate GDPR rules."
+      ]
+    },
+    {
+      "id": "AOD-CL-003",
+      "name": "Knowledge Preservation Review",
+      "version": "3.0.0",
+      "status": "Approved",
+      "items": [
+        "Verify that content delta calculations match the exact semantic hashes.",
+        "Check TTL metadata expirations on cached text fragments.",
+        "Ensure cache hits return unmodified content with correct routing headers."
+      ]
+    },
+    {
+      "id": "AOD-CL-004",
+      "name": "Release Review",
+      "version": "3.0.0",
+      "status": "Approved",
+      "items": [
+        "Confirm page speed scores on mobile and desktop meet Lighthouse 100.",
+        "Verify sitemap.xml holds correct priority weights (0.8 for Template C, 0.4 for Template D).",
+        "Ensure SSL certificates and Nginx configurations reload correctly after deployment."
+      ]
+    },
+    {
+      "id": "AOD-CL-005",
+      "name": "AI Self Validation",
+      "version": "3.0.0",
+      "status": "Approved",
+      "items": [
+        "Run the 7Q Completeness check on all generated copywriting.",
+        "Verify that no synthetic or placeholder IDs overlap with commercial registries.",
+        "Filter text against DECORUM forbidden marketing fluff terms."
+      ]
+    },
+    {
+      "id": "AOD-CL-006",
+      "name": "Documentation Review",
+      "version": "3.0.0",
+      "status": "Approved",
+      "items": [
+        "Check that code changes align with documented Architecture Decision Records (ADRs).",
+        "Verify markdown structures of knowledge objects follow standard schemas.",
+        "Ensure API signatures match typescript declarations."
+      ]
+    }
+  ],
+  "decision_models": [
+    {
+      "id": "AOD-DM-001",
+      "name": "Duplicate Detection",
+      "version": "3.0.0",
+      "status": "Approved",
+      "description": "Determines if the newly generated content matches the cached version. If the delta hash is below threshold epsilon, it retains cached output to prevent redundant recompilations.",
+      "inputs": [
+        "Current Generated Content",
+        "Cached Content Hash"
+      ],
+      "outputs": [
+        "Duplicate Check Status (Boolean)"
+      ]
+    },
+    {
+      "id": "AOD-DM-002",
+      "name": "Dependency Analysis",
+      "version": "3.0.0",
+      "status": "Approved",
+      "description": "Evaluates package dependency graphs to prevent circular imports and bloated bundles across modular layers.",
+      "inputs": [
+        "Module Config",
+        "Package Manifest"
+      ],
+      "outputs": [
+        "Dependency Risk Factor"
+      ]
+    },
+    {
+      "id": "AOD-DM-003",
+      "name": "Risk Assessment",
+      "version": "3.0.0",
+      "status": "Approved",
+      "description": "Analyzes text segments against AWG 2002 and GewO 1994 compliance rules, flagging forbidden terms (e.g. Austrian terms like Entsorgung) for non-licensed entities.",
+      "inputs": [
+        "Copywriting Text",
+        "Regulatory Disclosures"
+      ],
+      "outputs": [
+        "Legal Compliance Rating"
+      ]
+    },
+    {
+      "id": "AOD-DM-004",
+      "name": "Architecture Evaluation",
+      "version": "3.0.0",
+      "status": "Approved",
+      "description": "Scores code adjustments based on performance budgets (LCP, FID, CLS) before triggering production builds.",
+      "inputs": [
+        "Code Diff",
+        "Framework Standards"
+      ],
+      "outputs": [
+        "Core Web Vitals Predictor Score"
+      ]
+    },
+    {
+      "id": "AOD-DM-005",
+      "name": "Business Value Analysis",
+      "version": "3.0.0",
+      "status": "Approved",
+      "description": "Resolves whether a location warrants Template C (population > 10,000, high-value conversion components) or Template D (population < 10,000, lightweight structural branding).",
+      "inputs": [
+        "Municipality Geodata",
+        "Target Service Niche"
+      ],
+      "outputs": [
+        "Target Template Type (C or D)"
+      ]
+    },
+    {
+      "id": "AOD-DM-006",
+      "name": "Migration Analysis",
+      "version": "3.0.0",
+      "status": "Approved",
+      "description": "Categorizes legacy settings (Übernehmen, Präzisieren, Erweitern, etc.) to ensure seamless transition to versionable knowledge objects.",
+      "inputs": [
+        "Legacy Files",
+        "Target Governance Schema"
+      ],
+      "outputs": [
+        "Knowledge Preservation Plan"
+      ]
+    },
+    {
+      "id": "AOD-DM-007",
+      "name": "Breaking Change Analysis",
+      "version": "3.0.0",
+      "status": "Approved",
+      "description": "Checks if modifications in the data structures break active frontend controllers or validation engines.",
+      "inputs": [
+        "Database Schema Diff",
+        "API Endpoints"
+      ],
+      "outputs": [
+        "Compatibility Break Alert (Boolean)"
+      ]
+    }
+  ],
+  "glossary": [
+    {
+      "terms": [
+        "term: \"DECORUM"
+      ]
+    }
+  ]
+}

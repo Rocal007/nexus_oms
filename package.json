@@ -1,17 +1,23 @@
 {
-  "name": "nexus-oms",
+  "name": "nexus-oms-server",
   "version": "1.0.0",
-  "description": "Nexus Order Management System Dashboard",
-  "type": "module",
+  "description": "NEXUS OMS — lokaler IMAP-Polling-Server + statisches Frontend",
+  "main": "server.js",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev": "next dev -p 5100",
+    "build": "next build",
+    "start": "next start -p 5100"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "imap-simple": "^5.1.0",
+    "mailparser": "^3.7.1",
+    "next": "^16.2.10",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
   },
   "devDependencies": {
-    "vite": "^6.0.0"
-  },
-  "allowScripts": {
-    "esbuild@0.25.12": true
+    "nodemon": "^3.1.4"
   }
 }

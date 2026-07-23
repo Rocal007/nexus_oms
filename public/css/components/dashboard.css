@@ -1,0 +1,135 @@
+/**
+ * dashboard.css — Home screen: logo header + action card grid.
+ */
+
+/* ── Home wrapper ──────────────────────────────────────────── */
+.home {
+  display:         flex;
+  flex-direction:  column;
+  align-items:     center;
+  justify-content: center;
+  min-height:      calc(100vh - var(--space-3xl));
+  gap:             var(--space-3xl);
+  padding:         var(--space-2xl) 0;
+}
+
+/* ── Logo / header ─────────────────────────────────────────── */
+.home__header {
+  text-align: center;
+}
+.home__logo {
+  font-size:      3rem;
+  font-weight:    800;
+  font-family:    var(--font-mono);
+  letter-spacing: -0.03em;
+  background:     linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-teal) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height:    1;
+  margin-bottom:  0.4rem;
+}
+.home__tagline {
+  font-size:      0.78rem;
+  font-family:    var(--font-mono);
+  color:          var(--text-dim);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ── Card grid ─────────────────────────────────────────────── */
+.home__grid {
+  display:               grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:                   var(--space-md);
+  width:                 100%;
+  max-width:             640px;
+}
+
+/* ── Individual action card ────────────────────────────────── */
+.home-card {
+  position:          relative;
+  display:           flex;
+  flex-direction:    column;
+  align-items:       flex-start;
+  gap:               0.4rem;
+  padding:           1.6rem 1.4rem;
+  background:        var(--bg-card);
+  border:            1px solid var(--border);
+  border-radius:     var(--radius-xl);
+  cursor:            pointer;
+  text-align:        left;
+  font-family:       var(--font-sans);
+  transition:        transform 0.2s ease, border-color 0.2s ease,
+                     box-shadow 0.2s ease;
+  backdrop-filter:   blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  overflow:          hidden;
+}
+
+/* Top accent line — color driven by --card-color */
+.home-card::before {
+  content:    '';
+  position:   absolute;
+  top: 0; left: 0; right: 0;
+  height:     2px;
+  background: var(--card-color, var(--accent-cyan));
+  opacity:    0.7;
+}
+
+.home-card:hover {
+  transform:    translateY(-4px);
+  border-color: var(--card-color, var(--border-glow));
+  box-shadow:   0 0 0 1px color-mix(in srgb, var(--card-color, var(--accent-cyan)) 30%, transparent),
+                0 20px 60px rgba(0,0,0,0.4);
+}
+
+/* Primary card — slightly larger accent */
+.home-card--primary {
+  border-color: rgba(56, 189, 248, 0.25);
+  background:   rgba(56, 189, 248, 0.06);
+}
+.home-card--primary::before { opacity: 1; height: 3px; }
+
+/* ── Card internals ────────────────────────────────────────── */
+.home-card__icon {
+  font-size:     2rem;
+  line-height:   1;
+  margin-bottom: 0.25rem;
+}
+.home-card__title {
+  font-size:   1rem;
+  font-weight: 700;
+  color:       var(--text-primary);
+}
+.home-card__desc {
+  font-size:   0.75rem;
+  color:       var(--text-dim);
+  line-height: 1.5;
+}
+
+/* Count badge (top-right) */
+.home-card__badge {
+  position:      absolute;
+  top:           1rem;
+  right:         1rem;
+  min-width:     24px;
+  height:        24px;
+  border-radius: var(--radius-pill);
+  background:    color-mix(in srgb, var(--card-color, var(--accent-cyan)) 15%, transparent);
+  border:        1px solid color-mix(in srgb, var(--card-color, var(--accent-cyan)) 40%, transparent);
+  color:         var(--card-color, var(--accent-cyan));
+  font-size:     0.7rem;
+  font-weight:   700;
+  font-family:   var(--font-mono);
+  display:       flex;
+  align-items:   center;
+  justify-content: center;
+  padding:       0 0.4rem;
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .home__grid        { grid-template-columns: 1fr; max-width: 100%; }
+  .home__logo        { font-size: 2.2rem; }
+}

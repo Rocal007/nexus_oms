@@ -1,0 +1,221 @@
+/**
+ * pipeline-card.css — Pipeline layout, vertical connectors, stage cards.
+ * Color variants use BEM modifier + CSS custom property pattern.
+ * No keyframes here — references animations.css names only.
+ */
+
+/* ── Pipeline container ────────────────────────────────────── */
+.pipeline {
+  position:      relative;
+  margin:        0 auto var(--space-3xl);
+}
+
+/* ── Stage row ─────────────────────────────────────────────── */
+.stage-row {
+  display:     flex;
+  align-items: stretch;
+  gap:         var(--space-lg);
+  position:    relative;
+  z-index:     2;
+}
+
+/* ── Vertical connector ────────────────────────────────────── */
+.v-connector {
+  display:         flex;
+  justify-content: center;
+  align-items:     center;
+  height:          56px;
+  position:        relative;
+  z-index:         2;
+}
+.v-connector::before {
+  content:    '';
+  width:      2px;
+  height:     100%;
+  background: linear-gradient(180deg, var(--border-glow), var(--border));
+  position:   absolute;
+}
+.v-connector__arrow {
+  width:         28px;
+  height:        28px;
+  border-radius: 50%;
+  background:    var(--bg-surface);
+  border:        1.5px solid var(--border-glow);
+  display:       flex;
+  align-items:   center;
+  justify-content: center;
+  color:         var(--accent-cyan);
+  font-size:     0.85rem;
+  box-shadow:    var(--glow-cyan);
+  z-index:       1;
+  animation:     arrow-pulse 2.5s ease-in-out infinite;
+}
+
+/* ── Stage card base ───────────────────────────────────────── */
+.stage-card {
+  flex:               1;
+  background:         var(--bg-card);
+  border:             1px solid var(--border);
+  border-radius:      var(--radius-xl);
+  padding:            1.6rem var(--space-lg);
+  position:           relative;
+  overflow:           hidden;
+  cursor:             pointer;
+  transition:         transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  backdrop-filter:    blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Top accent line */
+.stage-card::before {
+  content:    '';
+  position:   absolute;
+  top: 0; left: 0; right: 0;
+  height:     2px;
+  background: linear-gradient(90deg, transparent, var(--card-accent, var(--accent-cyan)), transparent);
+  opacity:    0.8;
+}
+
+/* Hover shine overlay */
+.stage-card::after {
+  content:        '';
+  position:       absolute;
+  inset:          0;
+  background:     linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, transparent 100%);
+  opacity:        0;
+  transition:     opacity 0.25s;
+  pointer-events: none;
+}
+
+.stage-card:hover {
+  transform:    translateY(-4px);
+  border-color: var(--border-glow);
+  box-shadow:   var(--glow-cyan), 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+.stage-card:hover::after { opacity: 1; }
+
+/* Active state (set by PipelineView.setCardActive) */
+.stage-card--active {
+  border-color: var(--card-accent, var(--accent-cyan));
+  box-shadow:   0 0 0 1px var(--card-accent, var(--accent-cyan)),
+                0 0 40px rgba(56, 189, 248, 0.25);
+}
+
+/* Core / wide card variant */
+.stage-card--core {
+  flex:         2;
+  border-width: 1.5px;
+}
+
+/* ── Card internals ────────────────────────────────────────── */
+.stage-card__icon {
+  width:         44px;
+  height:        44px;
+  border-radius: var(--radius-md);
+  display:       flex;
+  align-items:   center;
+  justify-content: center;
+  margin-bottom: var(--space-md);
+  font-size:     1.3rem;
+  position:      relative;
+}
+
+.stage-card__stage-num {
+  position:      absolute;
+  top: -6px; right: -6px;
+  width:         18px;
+  height:        18px;
+  border-radius: 50%;
+  background:    var(--bg-base);
+  border:        1.5px solid var(--border);
+  font-size:     0.6rem;
+  font-weight:   700;
+  font-family:   var(--font-mono);
+  display:       flex;
+  align-items:   center;
+  justify-content: center;
+  color:         var(--text-muted);
+}
+
+.stage-card__title {
+  font-size:     0.95rem;
+  font-weight:   700;
+  margin-bottom: 0.4rem;
+  color:         var(--text-primary);
+  line-height:   1.3;
+}
+
+.stage-card__subtitle {
+  font-size:      0.72rem;
+  color:          var(--text-muted);
+  font-weight:    500;
+  font-family:    var(--font-mono);
+  margin-bottom:  0.85rem;
+  letter-spacing: 0.04em;
+}
+
+.stage-card__desc {
+  font-size:   0.8rem;
+  color:       var(--text-dim);
+  line-height: 1.6;
+}
+
+.stage-card__tags {
+  display:   flex;
+  flex-wrap: wrap;
+  gap:       var(--space-xs);
+  margin-top: var(--space-md);
+}
+
+/* Tag pill — color driven by parent color variant */
+.tag {
+  font-size:      0.65rem;
+  font-weight:    600;
+  font-family:    var(--font-mono);
+  letter-spacing: 0.06em;
+  padding:        0.2rem 0.6rem;
+  border-radius:  var(--radius-sm);
+  border:         1px solid;
+}
+
+/* Online status dot */
+.stage-card__status {
+  position:      absolute;
+  top: 1.2rem; right: 1.2rem;
+  width:         8px;
+  height:        8px;
+  border-radius: 50%;
+  background:    var(--accent-green);
+  box-shadow:    0 0 10px var(--accent-green);
+  animation:     blink 3s ease-in-out infinite;
+}
+
+/* ── Color variants (BEM + CSS custom property) ────────────── */
+.c-cyan   { --card-accent: var(--accent-cyan);   }
+.c-teal   { --card-accent: var(--accent-teal);   }
+.c-violet { --card-accent: var(--accent-violet); }
+.c-amber  { --card-accent: var(--accent-amber);  }
+.c-rose   { --card-accent: var(--accent-rose);   }
+.c-green  { --card-accent: var(--accent-green);  }
+
+/* Icon backgrounds per variant */
+.c-cyan   .stage-card__icon { background: rgba(56, 189, 248, 0.12); color: var(--accent-cyan);   }
+.c-teal   .stage-card__icon { background: rgba(45, 212, 191, 0.12); color: var(--accent-teal);   }
+.c-violet .stage-card__icon { background: rgba(167, 139, 250, 0.12); color: var(--accent-violet); }
+.c-amber  .stage-card__icon { background: rgba(251, 191, 36, 0.12);  color: var(--accent-amber);  }
+.c-rose   .stage-card__icon { background: rgba(251, 113, 133, 0.12); color: var(--accent-rose);   }
+.c-green  .stage-card__icon { background: rgba(74, 222, 128, 0.12);  color: var(--accent-green);  }
+
+/* Tag colors per variant */
+.c-cyan   .tag { background: rgba(56, 189, 248, 0.08);  border-color: rgba(56, 189, 248, 0.25);  color: var(--accent-cyan);   }
+.c-teal   .tag { background: rgba(45, 212, 191, 0.08);  border-color: rgba(45, 212, 191, 0.25);  color: var(--accent-teal);   }
+.c-violet .tag { background: rgba(167, 139, 250, 0.08); border-color: rgba(167, 139, 250, 0.25); color: var(--accent-violet); }
+.c-amber  .tag { background: rgba(251, 191, 36, 0.08);  border-color: rgba(251, 191, 36, 0.25);  color: var(--accent-amber);  }
+.c-rose   .tag { background: rgba(251, 113, 133, 0.08); border-color: rgba(251, 113, 133, 0.25); color: var(--accent-rose);   }
+.c-green  .tag { background: rgba(74, 222, 128, 0.08);  border-color: rgba(74, 222, 128, 0.25);  color: var(--accent-green);  }
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .stage-row   { flex-direction: column; }
+  .v-connector { height: 40px; }
+}

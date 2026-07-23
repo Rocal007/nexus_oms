@@ -1,0 +1,135 @@
+/**
+ * layout.css — Page structure, wrappers, background layers, footer.
+ * No component-specific styles. No design tokens defined here.
+ */
+
+/* ── Page wrapper ──────────────────────────────────────────── */
+.page-wrapper {
+  position:   relative;
+  z-index:    1;
+  max-width:  1400px;
+  margin:     0 auto;
+  padding:    0 var(--space-xl);
+}
+
+/* ── Background layers (aria-hidden, pointer-events none) ──── */
+.bg-canvas {
+  position:       fixed;
+  inset:          0;
+  z-index:        0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 40% at 20% 10%,  rgba(56, 189, 248, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 80%,  rgba(167, 139, 250, 0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 30% at 50% 50%,  rgba(45, 212, 191, 0.04) 0%, transparent 60%);
+}
+
+.grid-overlay {
+  position:       fixed;
+  inset:          0;
+  z-index:        0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.particles-layer {
+  position:       fixed;
+  inset:          0;
+  z-index:        0;
+  pointer-events: none;
+}
+
+/* ── Section label (reused across all sections) ────────────── */
+.section-label {
+  font-size:      0.7rem;
+  font-weight:    700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color:          var(--text-dim);
+  margin-bottom:  var(--space-xl);
+  display:        flex;
+  align-items:    center;
+  gap:            var(--space-sm);
+}
+.section-label::after {
+  content:    '';
+  flex:       1;
+  height:     1px;
+  background: linear-gradient(90deg, var(--border), transparent);
+}
+
+/* ── Site footer ───────────────────────────────────────────── */
+.site-footer {
+  border-top:     1px solid var(--border);
+  padding:        var(--space-xl) 0;
+  display:        flex;
+  align-items:    center;
+  justify-content: space-between;
+  flex-wrap:      wrap;
+  gap:            var(--space-md);
+  margin-bottom:  var(--space-md);
+}
+.footer-brand {
+  font-size:      0.8rem;
+  font-weight:    700;
+  font-family:    var(--font-mono);
+  letter-spacing: 0.08em;
+  color:          var(--text-dim);
+}
+.footer-brand span { color: var(--accent-cyan); }
+
+.footer-copy {
+  font-size: 0.72rem;
+  color:     var(--text-dim);
+}
+
+/* ── App shell (sidebar + content) ────────────────────────── */
+.app-shell {
+  display:    flex;
+  min-height: 100vh;
+  position:   relative;
+  z-index:    1;
+}
+
+/* Left sidebar */
+.app-nav {
+  width:         240px;
+  flex-shrink:   0;
+  position:      sticky;
+  top:           0;
+  height:        100vh;
+  overflow-y:    auto;
+  background:    rgba(8, 13, 26, 0.92);
+  border-right:  1px solid var(--border);
+  backdrop-filter:         blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display:       flex;
+  flex-direction: column;
+  z-index:       10;
+}
+
+/* Right content area */
+.app-content {
+  flex:       1;
+  min-width:  0;
+  padding:    var(--space-xl) var(--space-2xl);
+  overflow-y: auto;
+}
+
+/* Dashboard uses page-wrapper centering inside app-content */
+.page-wrapper {
+  max-width: 1100px;
+  margin:    0 auto;
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .app-nav   { width: 60px; }
+  .app-content { padding: var(--space-md); }
+}
+@media (max-width: 480px) {
+  .app-nav   { display: none; }
+}

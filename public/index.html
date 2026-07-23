@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    window.addEventListener("error", e => fetch("/log", {method:"POST", body: e.message + " at " + e.filename + ":" + e.lineno})); 
+    window.addEventListener("unhandledrejection", e => fetch("/log", {method:"POST", body: String(e.reason) + "\n" + (e.reason && e.reason.stack || "") }));
+  </script>
+  <title>NEXUS-OMS · Admin</title>
+  <meta name="description" content="NEXUS Order Management System — Aufträge erfassen, Distributoren verwalten, Einstellungen." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- CSS: tokens → layout → animations → components -->
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/components/navigation.css" />
+  <link rel="stylesheet" href="css/components/dashboard.css" />
+  <link rel="stylesheet" href="css/components/table.css" />
+  <link rel="stylesheet" href="css/components/form.css" />
+  <link rel="stylesheet" href="css/components/badge.css" />
+  <link rel="stylesheet" href="css/components/toast.css" />
+  <link rel="stylesheet" href="css/components/email-inbox.css" />
+  <link rel="stylesheet" href="css/components/login.css" />
+  <link rel="stylesheet" href="css/components/branche.css" />
+  <link rel="stylesheet" href="css/components/governance.css" />
+
+</head>
+<body>
+  <div class="bg-canvas"       aria-hidden="true"></div>
+  <div class="grid-overlay"    aria-hidden="true"></div>
+  <div class="particles-layer" aria-hidden="true"></div>
+
+  <div class="app-shell">
+    <nav class="app-nav" id="app-nav" aria-label="Hauptnavigation"></nav>
+    <main class="app-content" id="app-content" aria-live="polite"></main>
+  </div>
+
+  <div class="toast-container" id="toast-container"
+       aria-live="assertive" aria-atomic="true"></div>
+
+  <script type="module" src="js/main.js?v=3"></script>
+</body>
+</html>

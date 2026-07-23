@@ -1,0 +1,556 @@
+/**
+ * form.css — Admin form components (inputs, selects, textareas, toggles).
+ */
+
+/* ── Form card wrapper ─────────────────────────────────────── */
+.form-card {
+  background:         var(--bg-card);
+  border:             1px solid var(--border);
+  border-radius:      var(--radius-2xl);
+  padding:            var(--space-xl);
+  backdrop-filter:    blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  max-width:          720px;
+}
+
+/* ── Layout helpers ────────────────────────────────────────── */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+.form-row--3 {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: var(--space-md);
+}
+@media (max-width: 600px) {
+  .form-row  { grid-template-columns: 1fr; }
+  .form-row--3 { grid-template-columns: 1fr; }
+}
+
+.form-group {
+  display:        flex;
+  flex-direction: column;
+  gap:            0.4rem;
+  margin-bottom:  var(--space-md);
+}
+.form-group:last-of-type { margin-bottom: 0; }
+
+/* ── Label ─────────────────────────────────────────────────── */
+.form-label {
+  font-size:      0.72rem;
+  font-weight:    700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color:          var(--text-dim);
+}
+.form-label--required::after {
+  content: ' *';
+  color:   var(--accent-rose);
+}
+
+/* ── Base input / select / textarea ───────────────────────── */
+.form-input,
+.form-select,
+.form-textarea {
+  background:    rgba(255, 255, 255, 0.04);
+  border:        1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding:       0.7rem var(--space-md);
+  color:         var(--text-primary);
+  font-family:   var(--font-sans);
+  font-size:     0.88rem;
+  outline:       none;
+  width:         100%;
+  transition:    border-color 0.2s, box-shadow 0.2s;
+  -webkit-appearance: none;
+}
+.form-input::placeholder,
+.form-textarea::placeholder { color: var(--text-dim); }
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--accent-cyan);
+  box-shadow:   0 0 0 3px rgba(56, 189, 248, 0.12);
+}
+
+.form-textarea {
+  resize:     vertical;
+  min-height: 120px;
+  line-height: 1.6;
+}
+
+.form-select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2338bdf8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:   no-repeat;
+  background-position: right 1rem center;
+  padding-right:       2.5rem;
+}
+.form-select option {
+  background: #0d1529;
+  color:      var(--text-primary);
+}
+
+/* ── Source toggle (4 Optionen) ────────────────────────────── */
+.form-toggle {
+  display:       flex;
+  gap:           0.4rem;
+  background:    rgba(255,255,255,0.03);
+  border:        1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding:       0.3rem;
+  flex-wrap:     wrap;
+}
+.form-toggle__btn {
+  flex:            1;
+  min-width:       120px;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  gap:             0.35rem;
+  padding:         0.55rem var(--space-sm);
+  border-radius:   var(--radius-sm);
+  border:          1px solid transparent;
+  font-size:       0.82rem;
+  font-weight:     600;
+  font-family:     var(--font-sans);
+  cursor:          pointer;
+  background:      transparent;
+  color:           var(--text-dim);
+  transition:      background 0.2s, color 0.2s, border-color 0.2s, transform 0.1s;
+  white-space:     nowrap;
+}
+.form-toggle__btn:hover {
+  color:      var(--text-primary);
+  background: rgba(255,255,255,0.06);
+}
+.form-toggle__btn:active { transform: scale(0.97); }
+.form-toggle__btn--active {
+  background:   rgba(56, 189, 248, 0.12);
+  border-color: rgba(56, 189, 248, 0.35);
+  color:        var(--accent-cyan);
+}
+
+/* WhatsApp active → green tint */
+.form-toggle__btn--active[data-source="whatsapp"] {
+  background:   rgba(37, 211, 102, 0.12);
+  border-color: rgba(37, 211, 102, 0.35);
+  color:        #25d366;
+}
+
+/* ── Anrede toggle (Hr. / Fr. / Firma) ─────────────────────── */
+.form-anrede {
+  display:       flex;
+  gap:           0.35rem;
+  flex-wrap:     wrap;
+}
+.form-anrede__btn {
+  padding:         0.45rem 1rem;
+  border-radius:   var(--radius-sm);
+  border:          1px solid var(--border);
+  font-size:       0.82rem;
+  font-weight:     600;
+  font-family:     var(--font-sans);
+  cursor:          pointer;
+  background:      transparent;
+  color:           var(--text-dim);
+  transition:      background 0.2s, color 0.2s, border-color 0.2s, transform 0.1s;
+}
+.form-anrede__btn:hover {
+  color:      var(--text-primary);
+  background: rgba(255,255,255,0.05);
+}
+.form-anrede__btn:active { transform: scale(0.97); }
+.form-anrede__btn--active {
+  background:   rgba(167, 139, 250, 0.15);
+  border-color: rgba(167, 139, 250, 0.4);
+  color:        var(--accent-violet, #a78bfa);
+}
+
+/* ── Attachment upload area ─────────────────────────────────── */
+.form-attachment {
+  border:         2px dashed var(--border);
+  border-radius:  var(--radius-md);
+  padding:        var(--space-md);
+  display:        flex;
+  flex-direction: column;
+  gap:            0.6rem;
+  transition:     border-color 0.2s, background 0.2s;
+}
+.form-attachment:hover,
+.form-attachment--dragover {
+  border-color: var(--accent-cyan);
+  background:   rgba(56, 189, 248, 0.05);
+}
+.form-attachment__label {
+  font-size:   0.78rem;
+  color:       var(--text-dim);
+  text-align:  center;
+  line-height: 1.5;
+}
+.form-attachment__label span {
+  color:          var(--accent-cyan);
+  cursor:         pointer;
+  text-decoration: underline;
+}
+.form-attachment__input {
+  display: none;
+}
+.form-attachment__list {
+  display:        flex;
+  flex-wrap:      wrap;
+  gap:            0.4rem;
+  list-style:     none;
+  padding:        0;
+  margin:         0;
+}
+.form-attachment__item {
+  display:       flex;
+  align-items:   center;
+  gap:           0.3rem;
+  background:    rgba(56, 189, 248, 0.08);
+  border:        1px solid rgba(56, 189, 248, 0.2);
+  border-radius: var(--radius-sm);
+  padding:       0.25rem 0.6rem;
+  font-size:     0.75rem;
+  color:         var(--accent-cyan);
+}
+.form-attachment__remove {
+  background:   none;
+  border:       none;
+  cursor:       pointer;
+  color:        var(--text-dim);
+  font-size:    0.9rem;
+  line-height:  1;
+  padding:      0;
+  transition:   color 0.15s;
+}
+.form-attachment__remove:hover { color: var(--accent-rose); }
+
+.form-toggle--wrap {
+  flex-wrap: wrap;
+}
+.form-toggle__btn--sm {
+  font-size:  0.77rem;
+  padding:    0.4rem 0.6rem;
+  min-width:  auto;
+  flex:       0 0 auto;
+}
+
+/* ── Auftragsart Chip-Grid (Mehrfachauswahl) ──────────────── */
+.form-chip-grid {
+  display:    flex;
+  flex-wrap:  wrap;
+  gap:        0.4rem;
+  transition: outline 0.2s;
+}
+.form-chip-grid--error {
+  outline:        2px solid var(--accent-rose);
+  border-radius:  var(--radius-md);
+  padding:        0.3rem;
+}
+.form-chip {
+  padding:       0.35rem 0.85rem;
+  border-radius: 999px;
+  border:        1px solid var(--border);
+  background:    rgba(255,255,255,0.04);
+  color:         var(--text-dim);
+  font-size:     0.8rem;
+  font-weight:   500;
+  font-family:   var(--font-sans);
+  cursor:        pointer;
+  transition:    background 0.18s, color 0.18s, border-color 0.18s, transform 0.1s;
+  white-space:   nowrap;
+}
+.form-chip:hover {
+  background:    rgba(56, 189, 248, 0.06);
+  color:         var(--text-primary);
+  border-color:  rgba(56, 189, 248, 0.2);
+}
+.form-chip:active { transform: scale(0.95); }
+.form-chip--active {
+  background:    rgba(56, 189, 248, 0.15);
+  border-color:  rgba(56, 189, 248, 0.45);
+  color:         var(--accent-cyan);
+  font-weight:   600;
+}
+.form-chip-counter {
+  font-size:     0.72rem;
+  font-weight:   600;
+  color:         var(--text-dim);
+  transition:    color 0.2s;
+}
+.form-chip-counter--sub {
+  margin-left: auto;
+  font-size:   0.7rem;
+}
+
+/* ── Antiquitäten Sub-Panel ────────────────────────────────── */
+.form-antiq-panel {
+  margin-top:    0.7rem;
+  background:    rgba(251, 191, 36, 0.04);
+  border:        1px solid rgba(251, 191, 36, 0.22);
+  border-radius: var(--radius-md);
+  padding:       0.75rem var(--space-md);
+  animation:     antiqFadeIn 0.25s ease both;
+}
+@keyframes antiqFadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+.form-antiq-panel__header {
+  display:       flex;
+  align-items:   center;
+  gap:           0.5rem;
+  margin-bottom: 0.65rem;
+  flex-wrap:     wrap;
+}
+.form-antiq-panel__icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+.form-antiq-panel__label {
+  font-size:      0.68rem;
+  font-weight:    700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color:          rgba(251, 191, 36, 0.85);
+  flex:           1;
+}
+
+/* Sub-chip grid inherits .form-chip-grid layout */
+.form-chip-grid--sub {
+  gap: 0.35rem;
+}
+/* Sub-chips: slightly smaller, amber accent */
+.form-chip--sub {
+  font-size:  0.75rem;
+  padding:    0.28rem 0.7rem;
+}
+.form-chip--sub:hover {
+  background:   rgba(251, 191, 36, 0.08);
+  border-color: rgba(251, 191, 36, 0.25);
+  color:        var(--text-primary);
+}
+.form-chip--sub.form-chip--active {
+  background:   rgba(251, 191, 36, 0.16);
+  border-color: rgba(251, 191, 36, 0.5);
+  color:        #fbbf24;
+  font-weight:  600;
+}
+
+/* ── Entrümpelung Sub-Panel (teal accent) ──────────────────── */
+.form-entruep-panel {
+  background: rgba(45, 212, 191, 0.04);
+  border-color: rgba(45, 212, 191, 0.22);
+}
+.form-entruep-panel__label {
+  color: rgba(45, 212, 191, 0.85);
+}
+/* Teal sub-chips */
+.form-chip--sub-teal:hover {
+  background:   rgba(45, 212, 191, 0.08);
+  border-color: rgba(45, 212, 191, 0.25);
+  color:        var(--text-primary);
+}
+.form-chip--sub-teal.form-chip--active {
+  background:   rgba(45, 212, 191, 0.16);
+  border-color: rgba(45, 212, 191, 0.5);
+  color:        #2dd4bf;
+  font-weight:  600;
+}
+
+/* ── Verlassenschaft Sub-Panel (violet accent) ─────────────── */
+.form-verlassenschaft-panel {
+  background:   rgba(167, 139, 250, 0.04);
+  border-color: rgba(167, 139, 250, 0.22);
+}
+.form-verlassenschaft-panel__label {
+  color: rgba(167, 139, 250, 0.9);
+}
+/* Violet sub-chips */
+.form-chip--sub-violet:hover {
+  background:   rgba(167, 139, 250, 0.08);
+  border-color: rgba(167, 139, 250, 0.25);
+  color:        var(--text-primary);
+}
+.form-chip--sub-violet.form-chip--active {
+  background:   rgba(167, 139, 250, 0.16);
+  border-color: rgba(167, 139, 250, 0.5);
+  color:        #a78bfa;
+  font-weight:  600;
+}
+
+/* ── Messie Sub-Panel (rose accent) ────────────────────────── */
+.form-messie-panel {
+  background:   rgba(251, 113, 133, 0.04);
+  border-color: rgba(251, 113, 133, 0.22);
+}
+.form-messie-panel__label {
+  color: rgba(251, 113, 133, 0.9);
+}
+/* Rose sub-chips */
+.form-chip--sub-rose:hover {
+  background:   rgba(251, 113, 133, 0.08);
+  border-color: rgba(251, 113, 133, 0.25);
+  color:        var(--text-primary);
+}
+.form-chip--sub-rose.form-chip--active {
+  background:   rgba(251, 113, 133, 0.16);
+  border-color: rgba(251, 113, 133, 0.5);
+  color:        #fb7185;
+  font-weight:  600;
+}
+
+/* ── Umzug Sub-Panel (orange accent) ───────────────────────── */
+.form-umzug-panel {
+  background:   rgba(249, 115, 22, 0.04);
+  border-color: rgba(249, 115, 22, 0.22);
+}
+.form-umzug-panel__label {
+  color: rgba(249, 115, 22, 0.9);
+}
+/* Orange sub-chips */
+.form-chip--sub-orange:hover {
+  background:   rgba(249, 115, 22, 0.08);
+  border-color: rgba(249, 115, 22, 0.25);
+  color:        var(--text-primary);
+}
+.form-chip--sub-orange.form-chip--active {
+  background:   rgba(249, 115, 22, 0.16);
+  border-color: rgba(249, 115, 22, 0.5);
+  color:        #f97316;
+  font-weight:  600;
+}
+
+/* ── Geschäftsauflösung Sub-Panel (indigo accent) ──────────── */
+.form-geschaeft-panel {
+  background:   rgba(129, 140, 248, 0.04);
+  border-color: rgba(129, 140, 248, 0.22);
+}
+.form-geschaeft-panel__label {
+  color: rgba(129, 140, 248, 0.9);
+}
+/* Indigo sub-chips */
+.form-chip--sub-indigo:hover {
+  background:   rgba(129, 140, 248, 0.08);
+  border-color: rgba(129, 140, 248, 0.25);
+  color:        var(--text-primary);
+}
+.form-chip--sub-indigo.form-chip--active {
+  background:   rgba(129, 140, 248, 0.16);
+  border-color: rgba(129, 140, 248, 0.5);
+  color:        #818cf8;
+  font-weight:  600;
+}
+
+/* ── 5-stufige Prioritätsleiste ────────────────────────── */
+.form-prio-bar {
+  display:   flex;
+  gap:       0.35rem;
+  flex-wrap: wrap;
+}
+.form-prio-chip {
+  flex:          1;
+  min-width:     110px;
+  padding:       0.5rem 0.5rem;
+  border-radius: var(--radius-sm);
+  border:        1px solid var(--border);
+  background:    rgba(255,255,255,0.03);
+  color:         var(--text-dim);
+  font-size:     0.8rem;
+  font-weight:   600;
+  font-family:   var(--font-sans);
+  cursor:        pointer;
+  text-align:    center;
+  transition:    background 0.18s, color 0.18s, border-color 0.18s, transform 0.1s;
+}
+.form-prio-chip:hover {
+  background: rgba(255,255,255,0.07);
+  color:      var(--text-primary);
+}
+.form-prio-chip:active { transform: scale(0.97); }
+/* Active colours per level */
+.form-prio-chip--active[data-prio='low'] {
+  background:   rgba(96, 165, 250, 0.15);
+  border-color: rgba(96, 165, 250, 0.4);
+  color:        #60a5fa;
+}
+.form-prio-chip--active[data-prio='normal'] {
+  background:   rgba(52, 211, 153, 0.15);
+  border-color: rgba(52, 211, 153, 0.4);
+  color:        var(--accent-green, #34d399);
+}
+.form-prio-chip--active[data-prio='urgent'] {
+  background:   rgba(251, 191, 36, 0.15);
+  border-color: rgba(251, 191, 36, 0.4);
+  color:        #fbbf24;
+}
+.form-prio-chip--active[data-prio='high'] {
+  background:   rgba(251, 146, 60, 0.15);
+  border-color: rgba(251, 146, 60, 0.4);
+  color:        #fb923c;
+}
+.form-prio-chip--active[data-prio='emergency'] {
+  background:   rgba(251, 113, 133, 0.15);
+  border-color: rgba(251, 113, 133, 0.4);
+  color:        var(--accent-rose);
+}
+@media (max-width: 600px) {
+  .form-prio-chip { min-width: 80px; font-size: 0.72rem; }
+}
+
+/* ── Form actions ──────────────────────────────────────────── */
+.form-actions {
+  display:        flex;
+  gap:            var(--space-sm);
+  margin-top:     var(--space-xl);
+  padding-top:    var(--space-lg);
+  border-top:     1px solid var(--border);
+  flex-wrap:      wrap;
+}
+
+/* ── Help text ─────────────────────────────────────────────── */
+.form-hint {
+  font-size: 0.72rem;
+  color:     var(--text-dim);
+  line-height: 1.5;
+}
+
+/* ── Section divider ───────────────────────────────────────── */
+.form-section-title {
+  font-size:      0.7rem;
+  font-weight:    700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color:          var(--text-dim);
+  margin:         var(--space-lg) 0 var(--space-md);
+  display:        flex;
+  align-items:    center;
+  gap:            var(--space-sm);
+}
+.form-section-title::after {
+  content:    '';
+  flex:       1;
+  height:     1px;
+  background: var(--border);
+}
+
+/* ── Section step badge ────────────────────────────────────── */
+.form-step-badge {
+  display:         inline-flex;
+  align-items:     center;
+  justify-content: center;
+  width:           1.4rem;
+  height:          1.4rem;
+  border-radius:   50%;
+  background:      rgba(56, 189, 248, 0.15);
+  border:          1px solid rgba(56, 189, 248, 0.3);
+  color:           var(--accent-cyan);
+  font-size:       0.65rem;
+  font-weight:     800;
+  flex-shrink:     0;
+}

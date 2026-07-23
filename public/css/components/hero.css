@@ -1,0 +1,77 @@
+/**
+ * hero.css — Hero section component styles.
+ * Keyframe names reference animations.css only.
+ */
+
+.hero {
+  padding:    var(--space-3xl) 0 var(--space-2xl);
+  text-align: center;
+  position:   relative;
+}
+
+/* ── Badge ─────────────────────────────────────────────────── */
+.hero__badge {
+  display:        inline-flex;
+  align-items:    center;
+  gap:            0.5rem;
+  background:     rgba(56, 189, 248, 0.1);
+  border:         1px solid rgba(56, 189, 248, 0.3);
+  border-radius:  var(--radius-pill);
+  padding:        0.35rem var(--space-md);
+  font-size:      0.72rem;
+  font-weight:    600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color:          var(--accent-cyan);
+  margin-bottom:  var(--space-lg);
+}
+
+.hero__badge-dot {
+  width:         6px;
+  height:        6px;
+  border-radius: 50%;
+  background:    var(--accent-green);
+  box-shadow:    0 0 8px var(--accent-green);
+  animation:     pulse-dot 2s ease-in-out infinite;
+}
+
+/* ── Title ─────────────────────────────────────────────────── */
+.hero__title {
+  font-size:      clamp(2.8rem, 6vw, 5rem);
+  font-weight:    800;
+  line-height:    1.08;
+  letter-spacing: -0.03em;
+  margin-bottom:  var(--space-md);
+  background:     linear-gradient(135deg, #e2e8f0 0%, var(--accent-cyan) 50%, var(--accent-teal) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Subtitle ──────────────────────────────────────────────── */
+.hero__subtitle {
+  font-size:     1.05rem;
+  color:         var(--text-muted);
+  max-width:     560px;
+  margin:        0 auto var(--space-xl);
+  line-height:   1.7;
+  font-weight:   400;
+}
+
+/* ── Meta chips ────────────────────────────────────────────── */
+.hero__meta {
+  display:         flex;
+  justify-content: center;
+  gap:             var(--space-xl);
+  flex-wrap:       wrap;
+}
+
+.hero__meta-chip {
+  display:     flex;
+  align-items: center;
+  gap:         0.4rem;
+  font-size:   0.78rem;
+  color:       var(--text-dim);
+  font-weight: 500;
+}
+.hero__meta-chip svg { opacity: 0.6; }

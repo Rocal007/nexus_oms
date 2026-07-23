@@ -1,0 +1,218 @@
+/**
+ * branche.css — Branchenübersicht Tab-Layout
+ */
+
+/* ── Tab-Leiste ──────────────────────────────────────────────── */
+.branche-tabs {
+  display:         flex;
+  gap:             0.5rem;
+  margin-bottom:   var(--space-xl);
+  border-bottom:   1px solid var(--border);
+  padding-bottom:  0;
+}
+
+.branche-tab {
+  padding:        0.65rem 1.4rem;
+  border-radius:  var(--radius-md) var(--radius-md) 0 0;
+  border:         1px solid transparent;
+  border-bottom:  none;
+  background:     transparent;
+  color:          var(--text-dim);
+  font-size:      0.9rem;
+  font-weight:    600;
+  font-family:    var(--font-sans);
+  cursor:         pointer;
+  transition:     background 0.18s, color 0.18s, border-color 0.18s;
+  white-space:    nowrap;
+  position:       relative;
+  bottom:         -1px;
+}
+.branche-tab:hover {
+  color:       var(--text-primary);
+  background:  rgba(255,255,255,0.04);
+}
+.branche-tab--active {
+  color:           var(--tab-color, var(--accent-cyan));
+  background:      var(--bg-card);
+  border-color:    var(--border);
+  border-bottom:   1px solid var(--bg-card);
+}
+
+/* ── Panes ───────────────────────────────────────────────────── */
+.branche-pane         { display: none; }
+.branche-pane--active { display: block; animation: slide-in 0.25s ease; }
+
+/* ── Hero Banner ─────────────────────────────────────────────── */
+.branche-hero {
+  display:       flex;
+  align-items:   center;
+  gap:           var(--space-xl);
+  background:    linear-gradient(135deg, rgba(var(--b-accent, 56,189,248), 0.08) 0%, transparent 70%);
+  border:        1px solid rgba(255,255,255,0.07);
+  border-radius: var(--radius-2xl);
+  padding:       var(--space-xl) var(--space-2xl);
+  margin-bottom: var(--space-xl);
+  flex-wrap:     wrap;
+}
+.branche-hero__icon {
+  font-size:     4rem;
+  line-height:   1;
+  flex-shrink:   0;
+  filter:        drop-shadow(0 0 20px rgba(255,255,255,0.15));
+}
+.branche-hero__title {
+  font-size:      2rem;
+  font-weight:    800;
+  letter-spacing: -0.02em;
+  color:          var(--text-primary);
+  margin-bottom:  0.35rem;
+}
+.branche-hero__desc {
+  font-size:   0.9rem;
+  color:       var(--text-dim);
+  line-height: 1.6;
+  max-width:   560px;
+}
+
+/* ── KPI-Leiste ──────────────────────────────────────────────── */
+.branche-kpis {
+  display:         grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap:             var(--space-md);
+  margin-bottom:   var(--space-2xl);
+}
+.branche-kpi {
+  background:    var(--bg-card);
+  border:        1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding:       var(--space-lg);
+  text-align:    center;
+  transition:    transform 0.18s, border-color 0.18s;
+}
+.branche-kpi:hover {
+  transform:    translateY(-2px);
+  border-color: rgba(255,255,255,0.12);
+}
+.branche-kpi__icon  { font-size: 1.6rem; margin-bottom: 0.4rem; }
+.branche-kpi__value {
+  font-size:   0.9rem;
+  font-weight: 700;
+  color:       var(--text-primary);
+  margin-bottom: 0.2rem;
+}
+.branche-kpi__label {
+  font-size:  0.68rem;
+  color:      var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ── Section Titles ──────────────────────────────────────────── */
+.branche-section-title {
+  font-size:      0.7rem;
+  font-weight:    700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color:          var(--text-dim);
+  display:        flex;
+  align-items:    center;
+  gap:            var(--space-sm);
+  margin-bottom:  var(--space-md);
+}
+.branche-section-title::after {
+  content:    '';
+  flex:       1;
+  height:     1px;
+  background: var(--border);
+}
+
+/* ── Leistungs-Grid ──────────────────────────────────────────── */
+.branche-grid {
+  display:               grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap:                   var(--space-md);
+  margin-bottom:         var(--space-2xl);
+}
+.branche-card {
+  background:    var(--bg-card);
+  border:        1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding:       var(--space-lg);
+  transition:    transform 0.18s, border-color 0.18s, background 0.18s;
+  cursor:        default;
+}
+.branche-card:hover {
+  transform:    translateY(-3px);
+  border-color: var(--b-accent, rgba(56,189,248,0.3));
+  background:   var(--b-badge, rgba(56,189,248,0.06));
+}
+.branche-card__icon {
+  font-size:     1.8rem;
+  margin-bottom: 0.5rem;
+  display:       block;
+}
+.branche-card__name {
+  font-size:     0.88rem;
+  font-weight:   700;
+  color:         var(--text-primary);
+  margin-bottom: 0.3rem;
+}
+.branche-card__desc {
+  font-size:  0.78rem;
+  color:      var(--text-dim);
+  line-height: 1.5;
+}
+
+/* ── Prozess-Leiste ──────────────────────────────────────────── */
+.branche-prozess {
+  display:        flex;
+  gap:            var(--space-sm);
+  flex-wrap:      wrap;
+  margin-bottom:  var(--space-2xl);
+}
+.branche-prozess__step {
+  flex:          1;
+  min-width:     160px;
+  background:    var(--bg-card);
+  border:        1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding:       var(--space-lg);
+  position:      relative;
+  transition:    border-color 0.18s;
+}
+.branche-prozess__step:hover { border-color: var(--b-accent, rgba(56,189,248,0.3)); }
+.branche-prozess__num {
+  width:         32px;
+  height:        32px;
+  border-radius: 50%;
+  background:    rgba(255,255,255,0.06);
+  border:        1px solid var(--b-accent, rgba(56,189,248,0.4));
+  color:         var(--b-accent, var(--accent-cyan));
+  display:       flex;
+  align-items:   center;
+  justify-content: center;
+  font-size:     0.8rem;
+  font-weight:   800;
+  margin-bottom: 0.75rem;
+  font-family:   var(--font-mono);
+}
+.branche-prozess__title {
+  font-size:   0.85rem;
+  font-weight: 700;
+  color:       var(--text-primary);
+  margin-bottom: 0.3rem;
+}
+.branche-prozess__desc {
+  font-size:  0.78rem;
+  color:      var(--text-dim);
+  line-height: 1.5;
+}
+.branche-prozess__arrow {
+  display:  none; /* Pfeil optional — aktuell nicht sichtbar da wrap */
+}
+
+@media (max-width: 600px) {
+  .branche-hero       { flex-direction: column; text-align: center; }
+  .branche-hero__icon { font-size: 3rem; }
+  .branche-hero__title{ font-size: 1.5rem; }
+}
