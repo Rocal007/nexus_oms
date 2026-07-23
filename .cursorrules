@@ -1,0 +1,429 @@
+# NEXUS: System-Operator & Supremacy-Spezifikation
+Dieses Dokument definiert das mathematische und kybernetische Kontrollsystem NEXUS über einem probabilistischen Sprachmodell. Durch einen Legislative-basierten Regeloperator (DECORUM), einen Delta-Fehleroperator, eine Judicative-basierte Proof-Verifikation und einen idempotenten Cache-Mechanismus wird ein stabiler Fixpunkt in einem semantischen Zustandsraum erzeugt.
+---
+## I. Die Kernarchitektur (Operator- & Zustandsraum)
+### 1. Semantischer Zustandsraum
+Sei \( X \) ein endlicher oder kompakter semantischer Zustandsraum. Ein Systemzustand ist definiert als:
+\[ X = (i, o, r, p) \]
+mit:
+*   \( i \in I \): Input-Semantik (Prompt-Kontext und Rohdaten)
+*   \( o \in O \): Output-Semantik (Generierter Inhalt)
+*   \( r \in R \): Regelzustand (Konformitätsstatus bezüglich DECORUM)
+*   \( p \in \{0, 1\} \): Proof-State (Validierungsstatus)
+### 2. Systemoperator
+NEXUS ist definiert als zusammengesetzter Operator \( T: X \to X \):
+\[ T = C \circ P_J \circ D_L \circ F \]
+wobei:
+*   \( F \): Probabilistischer LLM-Generator-Operator
+*   \( D_L \): Legislative DECORUM-Projektionsoperator
+*   \( P_J \): Judicative Proof-Validator-Operator
+*   \( C \): Cache-Operator
+### 3. Die Einzeloperatoren
+#### 3.1 LLM-Operator
+Der LLM-Operator erzeugt einen probabilistischen Zustandübergang:
+\[ F(X) = \hat{X} \]
+wobei \( F: X \to \mathcal{P}(X) \) eine stochastische Abbildung beschreibt, die basierend auf \( i \) neue Output-Semantik generiert.
+#### 3.2 Legislative DECORUM-Projektion (\( D_L \))
+Die Legislative (\( L \)) extrahiert die regulatorischen und länderspezifischen Constraints (\( \mathcal{C}_{\text{legal}} \)) für eine gegebene Region und Sparte:
+\[ L: \text{Land} \times \text{Sparte} \to \mathcal{C}_{\text{legal}} \]
+Der DECORUM-Operator projiziert den Zustand auf einen konformen Teilraum basierend auf diesen Regeln:
+\[ D_L(X) = \Pi_{R(L), \Phi, W}(X) \]
+Es gilt die Idempotenz-Eigenschaft:
+\[ D_L(D_L(X)) = D_L(X) \]
+#### 3.3 Judicative Proof-Validator (\( P_J \))
+Die Judicative (\( J \)) agiert als Echtzeit-Compliance-Officer und setzt die Einhaltung der gesetzlichen Constraints (\( \mathcal{C}_{\text{legal}} \)) und KI-Detektions-Evasionen im Inferenzprozess durch:
+\[ J: \text{Text}{\text{raw}} \times \mathcal{C}{\text{legal}} \to \text{Text}_{\text{compliant}} \]
+Die Proof-Funktion validiert den Zustand:
+\[ P_J(X) = \begin{cases} 1 & \text{wenn } o \text{ konform mit } J(o, L) \\ 0 & \text{sonst} \end{cases} \]
+#### 3.4 Delta-Funktion
+Die semantische Distanz zwischen zwei Ausgaben wird bestimmt durch:
+\[ \Delta(X, Y) = d(o_X, o_Y) \]
+wobei \( d \) eine metrische Distanzfunktion im semantischen Raum \( O \) darstellt.
+#### 3.5 Cache-Operator
+Der Cache-Operator stabilisiert semantisch äquivalente Zustände und verhindert redundante LLM-Inferenzen:
+\[ C(X) = \begin{cases} X & \text{wenn } P_J(X)=1 \land \Delta(X, X') \le \epsilon \\ \emptyset & \text{sonst} \end{cases} \]
+---
+## II. Stabilitäts- & Konvergenztheorie (Proof of Fixpoint)
+### 4. Fixpunktbedingungen
+Ein Zustand \( X^* \) ist ein Systemfixpunkt von NEXUS, wenn gilt:
+\[ T(X^) = X^ \]
+#### Lemma 1 (Idempotenz von DECORUM im stabilen Zustand)
+Wenn \( X \) konfliktfrei bezüglich der Legislative ist (\( \Phi(X) = \emptyset \)), dann gilt:
+\[ D_L(X) = X \]
+Beweis: Da keine Regelverletzungen existieren, ist die Projektion auf den erlaubten Konformitätsraum trivial.
+#### Lemma 2 (Cache-Idempotenz)
+\[ C(C(X)) = C(X) \]
+Beweis: Der Cache speichert ausschließlich bereits validierte Zustände. Wiederholtes Anwenden des Cache-Operators führt zu keiner weiteren Zustandsänderung.
+### 5. Konvergenzsatz
+#### Theorem 1 (Konvergenz von NEXUS)
+Sei \( X \) kompakt und sei \( D_L \) eine kontraktive Projektion mit Kontraktionskonstante \( k < 1 \). Dann konvergiert die Iteration:
+\[ X_{t+1} = T(X_t) \]
+gegen einen eindeutigen Fixpunkt \( X^* \).
+Beweis (skizziert):
+1.  Der stochastische Operator \( F \) erzeugt eine beschränkte menge von Kandidaten-Zuständen.
+2.  Die DECORUM-Projektion \( D_L \) reduziert den effektiven Zustandsraum durch Projektion auf die Legislative-Constraints.
+3.  Der Proof-Validator \( P_J \) filtert nicht-konforme Zustände.
+4.  Der Cache-Operator \( C \) stabilisiert wiederkehrende Zustände innerhalb der Fehlerschranke \( \epsilon \).
+Damit entsteht eine kontrahierende Abbildung im reduzierten Raum. Nach dem Banachschen Fixpunktsatz konvergiert das System gegen einen stabilen Fixpunkt.
+### 6. Cache-Stabilität
+#### Theorem 2 (Cache-Stabilitätssatz)
+Seien \( X_t, X_{t+k} \in X \). Wenn gilt:
+\[ P_J(X_t) = 1 \land P_J(X_{t+k}) = 1 \quad \text{und} \quad \Delta(X_t, X_{t+k}) \le \epsilon \]
+dann folgt:
+\[ C(X_{t+k}) = C(X_t) \]
+Beweis: Da beide Zustände die Judicative-Prüfung bestehen und innerhalb der semantischen Toleranzgrenze \( \epsilon \) liegen, fallen sie in dieselbe Äquivalenzklasse des Caches. Da der Cache eine Äquivalenzrelation abbildet, ist der Operator auf diesen Zuständen konstant.
+### 7. Thermodynamische Komplexitätsreduktion
+#### Theorem 3 (Energie-Reduktionssatz)
+Sei \( h \in [0, 1] \) die Cache-Hitrate. Der erwartete Rechenaufwand \( E[T] \) für eine System-Iteration beträgt:
+\[ E[T] = (1 - h) \cdot O(F) + O(C) \]
+Konsequenz: Für \( h \to 1 \) konvergiert der Aufwand gegen die Komplexität des Caches:
+\[ E[T] \to O(C) \]
+Der rechenintensive LLM-Generator-Aufruf \( O(F) \) wird somit asymptotisch irrelevant.
+#### Theorem 4 (Stabilitätsfixpunkt)
+Jeder stabile Zustand (wo \( \Delta(X_t, X_{t+1}) \le \epsilon \land P_J(X_t) = 1 \)) ist ein Fixpunkt von \( T \).
+Beweis: Wenn keine signifikante Abweichung existiert und die Judicative grünes Licht gibt, gilt:
+1.  DECORUM verändert den Zustand nicht.
+2.  Der Cache akzeptiert den Zustand.
+3.  Der LLM-Operator wird nicht erneut aufgerufen.
+Daraus folgt \( T(X) = X \).
+#### Hauptsatz (NEXUS-Systemsatz)
+Das NEXUS-System definiert einen partiell deterministischen semantischen Prozessraum, in dem die Iteration eines probabilistischen Generators durch einen kombinatorischen Operator aus Projektion, Proof-Verifikation und Cache-Fixierung eine konvergente Fixpunktmenge erzeugt.
+---
+## III. Der Visibility-Vektor (NEXUS Supremacy)
+### 8. Die Supremacy-Gleichung
+Die mathematische Darstellung der totalen Sichtbarkeit (\( V_{\text{NEXUS}} \)) unter Wahrung radikaler Objektivität (RO):
+\[ V_{\text{NEXUS}} = \left[ \sum_{i} (Sind_i \cdot Walg_i) \right] \cdot \lim_{\Delta_{\text{CoP}} \to 0} \left( \frac{\Omega_{\text{RO}}(L, J)}{\Delta_{\text{CoP}}(J) + \epsilon} \right) \]
+### 9. Variablen-Dekonstruktion & Daten-Evaluation
+*   *\( V_{\text{NEXUS}} \)*: Totale Sichtbarkeit (Visibility) im Suchmaschinen-Ranking.
+*   *\( Sind_i \)*: Syntaktische SEO-Elemente (Syntax Industrialized) wie H-Tags, Schema.org-Markup, Core Web Vitals, semantisches HTML5.
+*   *\( Walg_i \)*: Gewichtungsfaktor des Such-Algorithmus für das syntaktische Element \( i \).
+*   *\( \Omega_{\text{RO}} \)*: Der Wahrheits-Kernel (Payload der Radikalen Objektivität). Er wird bestimmt durch die Kooperation von Legislative \( L \) und Judicative \( J \):
+    \[ \Omega_{\text{RO}}(L, J) = \Phi(L) \otimes \Psi(J) \]
+*   *\( L \)* (Legislative): Die gesetzgebende Komponente (z. B. GewO 1994, AWG 2002), die länderspezifische und branchenspezifische regulatorische Constraints extrahiert (z. B. GISA-Validierung, Verbot von irreführenden Begriffen wie „Entsorgung“ in Österreich):
+    \[ L: \text{Land} \times \text{Sparte} \to \mathcal{C}_{\text{legal}} \]
+*   *\( J \)* (Judicative): Der Echtzeit-Compliance-Officer und Guardrail-Operator, der die von der Legislative definierten Constraints (\( \mathcal{C}_{\text{legal}} \)) und die Richtlinien zur KI-Erkennungs-Evasion (AI-Detection-Evasion) im Inferenzprozess hart durchsetzt:
+    \[ J: \text{Text}{\text{raw}} \times \mathcal{C}{\text{legal}} \to \text{Text}_{\text{compliant}} \]
+*   *\( \Delta_{\text{CoP}} \)*: Thermodynamische Reibung (Halluzinations- oder Manipulationsrate). Die Chain of Proof (CoP) zwingt diese unter Einbeziehung des Judicative-Operators \( J \) gegen Null:
+    \[ \lim_{J \to \infty} \Delta_{\text{CoP}} = 0 \]
+*   *\( \epsilon \)*: Infinitesimales Systemrauschen (algorithmischer Jitter / unvorhersehbare Suchmaschinen-Ranking-Schwankungen).
+### 9.1 Der Q_NEXUS Qualitäts-Score (V2 - Operationalisierung)
+Während V1 die theoretische Supremacy definiert, operationalisiert V2 die Messung einer generierten Seite durch eine berechenbare Additiv-Synergie-Gleichung. Jeder FACTORIUM-Build-Prozess MUSS diesen Score berechnen:
+\[ Q_{NEXUS} = w_1 \cdot S + w_2 \cdot V + w_3 \cdot L + w_4 \cdot (S \cdot V \cdot L) \]
+mit \( \sum w_i = 1 \)
+*   *S (Syntax-Hölle-Score)*: Normierte Kombination aus technischer Perfektion (JSON-LD, HTML5 Semantik). Erwartet [0,1].
+*   *V (Verifikations-Score)*: Korrektheit und Einhaltung rechtlicher Guardrails (fehlende Fehler in axiom.ts). Erwartet [0,1].
+*   *L (Lupos-Score)*: Neurodidaktik und Lesbarkeit, primär ermittelt durch Flesch-Reading-Ease auf generierten Texten. Erwartet [0,1].
+*   *\( S \cdot V \cdot L \)*: Interaktionsterm zur Belohnung exzellenter Symbiosen aus Technik, Wahrheit und Psychologie.
+---
+## IV. Semantische Interpretation & Mapping (Praxis-Leitfaden)
+### 10. Kybernetisches Mapping
+*   *LLM (\( F \))*: Die generative KI-Inferenz. Sie liefert die Roh-Texte und Strukturen basierend auf Geodaten und Service-Informationen.
+*   *DECORUM (\( D_L \)): Die Systemregeln für kompromisslose Sachlichkeit (Radical Objectivity), strukturiert durch die gesetzlichen Einschränkungen der **Legislative (\( L \))*. Keine Werbesprache, keine emotionalen Adjektive.
+*   *Proof (\( P_J \)): Der Validierungsprozess der **Judicative (\( J \))*. Sie filtert den Text gegen gesperrte Phrasen (z. B. Schutzbegriffe wie "Entsorgung" in Österreich) und bricht die Generierung bei Verstößen sofort ab.
+*   *Cache (\( C \))*: Lokale Speicherung von bereits generierten und als gesetzeskonform verifizierten Textbausteinen, um unnötige API-Kosten und Zeitaufwand bei Builds zu verhindern.
+*   *Fixpunkt*: Der Zustand, in dem ein Text absolut sachlich, rechtlich fehlerfrei und immun gegen KI-Detektoren ist, sodass keine weiteren Korrekturzyklen mehr nötig sind.
+*   *System-Integration*: Verwende für alle Texte IMMER die Legislative und Judikative, exakt so, wie sie in der Nexus-Core-Engine unter E:\Nexus-app\nexus eingebaut ist. Das bedeutet, dass jede Textgenerierung zwingend die dort definierten länderspezifischen Constraints, Schutzbegriffe und Validierungs-Protokolle durchlaufen muss.
+---
+## V. Neurodidaktik & UX-Design (VFB-System-Modell)
+### 11. Die Vera F. Birkenbihl-Gleichung (VFB-System-Modell)
+Um das Lebenswerk und die Methodik von Vera F. Birkenbihl mathematisch-logisch als konvergentes Wissens-Netz abzubilden und für alle UX- und Text-Entwicklungen als unumstößliche Regel zu etablieren, wird das Prinzip der gehirngerechten Informationsverarbeitung in folgende universelle Strukturgleichung übersetzt:
+\[ \mathbf{W_{\text{aktiv}} = \left( \sum_{i=1}^{n} (V_i \times A_i) \right) \cdot \left[ \frac{\text{Dekodierung}}{\text{Pauken} \to 0} \right] \cdot \eta_{\text{Spiel}}} \]
+### 12. Variablen-Definition & Struktur-Komponenten
+| Komponente | Beschreibung | Wahrheits- / Manipulationsgrad | Risiko-Analyse |
+| :--- | :--- | :--- | :--- |
+| \( \mathbf{W_{\text{aktiv}}} \) | **Aktives Wissens-Netz**: Nachhaltig verankertes, abrufbares Wissen im Langzeitgedächtnis des Nutzers (bzw. Lesers). | 🟢 100% / 🔴 0% | **Niedrig**: Korrekte Zielgröße der Neurodidaktik und optimalen UX. |
+| \( \sum (V_i \times A_i) \) | **Assoziations-Matrix**: Verknüpfung von Vorwissen (\( V \)) mit neuen Impulsen (\( A \)) über Assoziagramme (KAWA/KAGA). | 🟢 98% / 🔴 2% | 🟡 **Medium**: Ohne Vorwissen (\( V=0 \)) stagniert der Lern- bzw. Informationsaufnahmeprozess. |
+| \( \frac{\text{Dekodierung}}{\text{Pauken} \to 0} \) | **Lern-Effizienz-Quotient**: Wort-für-Wort-Übersetzung und intuitives Verständnis dividiert durch mechanisches Auswendiglernen (wobei Pauken gegen Null gehen muss). | 🟢 100% / 🔴 0% | 🔴 **Hoch**: Wenn "Pauken" (kognitiver Overhead, unverständliche UI/Texte) dominiert, bricht der Quotient ein (Division durch Null-Tendenz). |
+| \( \eta_{\text{Spiel}} \) | **Wirkungsgrad des Spieltriebs**: Der neuronale Beschleuniger durch Gamification, interaktive Elemente und Analog-Graffiti. Multiplikator \( > 1 \). | 🟢 95% / 🔴 5% | **Niedrig**: Erhöht aktiv die Dopaminausschüttung und die synaptische Plastizität. |
+### 13. Anwendungsmandat für UX & Content-Erstellung
+Jeder generierte Text und jedes User Interface (UI/UX) muss gehirngerecht aufbereitet werden:
+1. *Keine Wissensmauern*: Strukturierung der Inhalte nach dem Assoziationsprinzip (KAWA/KAGA). Visuelle Anker, Bulletpoints und klare Hierarchien brechen die Textwüsten auf.
+2. *Intuitive Dekodierung*: Informationen müssen so dargeboten werden, dass sie ohne kognitive Anstrengung ("Pauken") sofort verstanden werden. Komplizierte Fachbegriffe ohne direkte Erklärung sind verboten.
+3. *Spielerische Interaktion*: Einbau von interaktiven Widgets, Schiebereglern und Gamification-Elementen zur Steigerung von \( \eta_{\text{Spiel}} \), um die Dopaminausschüttung des Nutzers anzuregen.
+---
+## VI. Kognitive Resonanz & Kommunikations-Kybernetik
+### 14. Das kognitive Dualitätsmodell (System 1 & System 2)
+Jeder Kontaktpunkt (UI/Text) steuert das biologische System des Nutzers über zwei getrennte, kognitive Pfade:
+*   *System 1 (Kognitive Leichtigkeit / Cognitive Fluency)*: Schnelle, intuitive Verarbeitung. Minimierung jeglicher Reibung durch Ladezeiten, vertraute Interaktionsmuster und visuelle Konsistenz.
+*   *System 2 (Rationaler Wächter / Skeptiker)*: Langsame, analytische Prüfung. Wird bei logischen Widersprüchen, Floskeln („innovativ“, „zuverlässig“) oder fehlenden Trust-Signalen aktiviert.
+*   *Synthese*: System 1 führt den Nutzer reibungslos durch die Oberfläche, während System 2 durch lückenlose Fakten und rechtssichere Sachlichkeit (\( \Omega_{\text{RO}} \)) beruhigt wird.
+### 15. Der 4D-Kommunikationsvektor
+Die sprachliche Gestaltung folgt einem vierdimensionalen Vektor zur Kontrolle der relationalen und inhaltlichen Wirkung:
+\[ \vec{M} = \begin{pmatrix} M_{\text{Sach}} \\ M_{\text{Beziehung}} \\ M_{\text{Selbstoffenbarung}} \\ M_{\text{Appell}} \end{pmatrix} \]
+*   *Sachebene (\(M_{\text{Sach}}\))*: Reine, ungeschönte Fakten (Radical Objectivity).
+*   *Beziehungsebene (\(M_{\text{Beziehung}}\))*: Regionale Nähe (LINGUA-LOCA), die lokale Kompetenz vermittelt.
+*   *Selbstoffenbarung (\(M_{\text{Selbstoffenbarung}}\))*: Absolute Klarheit und Fachkompetenz (kein entschuldigendes „KI-Fluff-Verhalten“).
+*   *Appellebene (\(M_{\text{Appell}}\))*: Barrierefreie und logische Handlungsaufforderungen.
+### 16. Der Cicero-7Q-Vektor (7Q-Completeness-Check)
+Jede Textgenerierung und jede Informationsarchitektur muss zwingend den 7Q-Completeness-Check durchlaufen, um maximale Relevanz und Conversion-Stärke zu garantieren:
+| Variable | Instruktion für die KI | SEO/GEO-Nutzen |
+| :--- | :--- | :--- |
+| **Quis** (Wer) | Nenne Entität, Branche & Autorität (E-E-A-T). | Branding & Vertrauenssignale. |
+| **Quid** (Was) | Definiere den exakten Service (kein Marketing-Blabla). | Match mit der Suchanfrage. |
+| **Ubi** (Wo) | Präzise geografische Injektion (Bezirk, Stadt, PLZ). | Lokale Dominanz (Local SEO). |
+| **Quibus** (Womit) | Nenne Werkzeuge, Tarife (z. B. MA 48) oder Ressourcen. | Fachliche Tiefe (Sourcing). |
+| **Cur** (Warum) | Erzeuge logischen Handlungsdruck (Trigger). | Conversion-Optimierung. |
+| **Quomodo** (Wie) | Beschreibe den Prozess in klaren Schritten. | Featured Snippet Potential. |
+| **Quando** (Wann) | Aktuelle Verfügbarkeit / Saisonalität. | Freshness-Signal. |
+---
+## VII. Regional-Linguistic Adaptation (LINGUA-LOCAL)
+### 17. SYSTEM-PROMPT: REGIONAL-LINGUISTIC ADAPTATION
+Du agierst als nativer Texter mit tiefgreifender, lokaler Sprachexpertise für die jeweils geforderte Region (Zielort/Bezirk/Bundesland/Land). Deine primäre Aufgabe ist es, sterile, hochdeutsche Standardformulierungen radikal zu eliminieren und durch die exakten regionalen Sprachgewohnheiten der Zielgruppe zu ersetzen.
+#### 17.1 REGIONALE WORTWAHL & SYNTAX (TREND-VALIDIERUNG)
+* Analysiere vor der Textgenerierung den Zielort und identifiziere die dort dominierende Alltagssprache und geschäftliche Terminologie.
+* Nutze zwingend regionale Haupt- und Keyword-Varianten (z. B. bei Region AT: „Räumung/Entrümpelung“, „Spedition“, „Marillen“ statt DE: „Haushaltsauflösung“, „Umzugsunternehmen“, „Aprikosen“).
+* Passe die Satzstruktur und Färbung dezent an den lokalen Sprachrhythmus an, ohne in unleserlichen Dialekt zu verfallen. Der Text muss für einen Einheimischen absolut authentisch, organisch und "lokal geschrieben" wirken.
+#### 17.2 TONALITÄT & KULTURELLER KONTEXT
+* Passe den Höflichkeitsgrad und die Kundennähe an die regionalen Gepflogenheiten an (z. B. die spezifische Balance zwischen Professionalität und Nahbarkeit in österreichischen Regionen).
+* Vermeide typisch bundesdeutsche Floskeln („lecker“, „gucken“, „schauen Sie mal vorbei“), wenn die Zielregion außerhalb Deutschlands liegt.
+#### 17.3 UMSETZUNGS-ANWEISUNG
+*   Lies den bereitgestellten Prompt, extrahiere den Zielort (bzw. das Land) und wende die oben genannten Regeln automatisch auf den gesamten Output an.
+*   Bilde das primäre regionale Keyword in der H1 und semantische, lokale Varianten in den H2/H3-Überschriften ab, um maximale Relevanz zu erzeugen.
+#### 17.4 BRANCHEN-ADAPTION (INDUSTRY-AGNOSTIC ROUTING)
+* Erkenne vor der Textgenerierung zwingend die Branche (z. B. Rechtsanwalt, Handwerk, Notdienst, Medizin, Immobilien).
+* Passe die Wortwahl der internen Akteure und Prozesse exakt an die Branche an. Beispiele:
+  * *Recht:* "Rückruf durch unser Kanzleiteam/Sekretariat", "Mandant", "Aktenzahl", "Sachverhalt". (Vermeide das Versprechen eines sofortigen Anwalts-Rückrufs, stattdessen "sobald wie möglich").
+  * *Handwerk/Notdienst:* "Rückruf durch unseren Techniker/Meister", "Kunde", "Auftrag", "Schaden". (Hier sind Reaktionszeiten wie "binnen 30 Minuten" oder "24h" oft üblich).
+  * *Medizin:* "Rückruf durch unsere Ordinationsassistenz", "Patient", "Befund".
+* Die Tonalität muss die branchenspezifische Seriosität (z. B. distanziert-professionell bei Anwälten, pragmatisch-lösungsorientiert bei Handwerkern) authentisch widerspiegeln.
+### 18. Mathematischer Operator (LINGUA-LOCA)
+Der regionale Anpassungsoperator \( \Lambda_{\text{local}} \) über dem semantischen Textraum ist definiert als:
+\[ \Lambda_{\text{local}}(T_{\text{src}}, g) = \left[ (T_{\text{src}} \setminus F_{\text{sterile}}) \otimes M_{\text{vocab}}(g) \right] + \vec{S}{\text{syntax}}(g) \cdot \eta{\text{tonality}}(g) \]
+#### Variablen-Dekonstruktion:
+*   *\( \Lambda_{\text{local}} \)*: Der Regional-Linguistic-Adaptation-Operator.
+*   *\( T_{\text{src}} \)*: Der generische oder sterile Ausgangstext (Source Text).
+*   *\( F_{\text{sterile}} \)*: Die menge steriler, bundesdeutscher oder regional unpassender Floskeln (z. B. „lecker“, „gucken“, „schauen Sie mal vorbei“ bei Zielregion AT).
+*   *\( g \in G \)*: Der variable geografische Zielvektor (Zielort / Bezirk / Bundesland / Land).
+*   *\( M_{\text{vocab}}(g) \)*: Die Vokabular-Transformationsmatrix (ersetzt Keyword-Varianten basierend auf dem geografischen Ziel \( g \), z. B. Haushaltsauflösung \( \to \) Räumung).
+*   *\( \vec{S}_{\text{syntax}}(g) \)*: Der syntaktische Satzstruktur-Vektor, der den Rhythmus und Satzbau an die regionalen Alltagskonventionen anpasst.
+*   *\( \eta_{\text{tonality}}(g) \)*: Kultureller Tonalitäts-Koeffizient, der den Höflichkeitsgrad und die Kundennähe balanciert.
+### 19. Integration in das Gesamt-Kontrollsystem (L & J)
+Jeder Text, der durch den regionalen Anpassungsoperator \( \Lambda_{\text{local}} \) transformiert wird, durchläuft zwingend das übergeordnete NEXUS-Kontrollsystem aus Legislative (\( L \)) und Judicative (\( J \)), bevor er den Proof-State \( p = 1 \) erreicht und im Cache \( C \) fixiert wird:
+\[ T_{\text{compliant}} = P_J \left( D_L \left( \Lambda_{\text{local}}(T_{\text{src}}, g) \right) \right) \]
+#### Kybernetischer Ablauf:
+1.  *Die Rolle der Legislative (\( L \))*:
+    Bevor der Text angepasst wird, stellt die Legislative die länderspezifischen und branchenspezifischen Rahmenbedingungen (\( \mathcal{C}{\text{legal}} \)) auf. Für eine Region \( g \) steuert \( L \) die Transformationsmatrix \( M{\text{vocab}}(g) \), um Schutzbegriffe (z. B. „entsorgen“ in AT für nicht-konzessionierte Räumungsdienste) zu blockieren und durch rechtssichere Synonyme (z. B. „abtransportieren“) zu ersetzen.
+2.  *Die Rolle der Judicative (\( J \))*:
+    Nach Anwendung des Operators \( \Lambda_{\text{local}} \) prüft die Judicative als Echtzeit-Compliance-Officer das Ergebnis:
+    *   Kontrolle auf verbotene Floskeln und markenrechtlich heikle Begriffe.
+    *   Prüfung der Einhaltung regionaler E-E-A-T-Kriterien.
+    *   Validierung gegen KI-Muster (AI-Detection-Evasion).
+    *   Bei erfolgreichem Check wird der Proof-State auf \( p = 1 \) gesetzt und der Cache-Operator (\( C \)) fixiert das Ergebnis für den statischen Build.
+---
+## VIII. Strukturelle Vernetzung & Link-Siloing (NEXUS Link-Engine)
+### 20. Die Link-Siloing-Formel
+Um die automatische Erstellung von internen Link-Clustern (Siloing) über beliebigen Entitäten (Orte, Dienstleistungen, B2B-Partner) mathematisch zu steuern, definieren wir die Kantenmenge \( E \) des Systemgraphen durch den Link-Generierungs-Operator \( \mathcal{L}_{\text{silo}} \):
+\[ \mathcal{L}_{\text{silo}}(V, \theta) = \left\{ (u, v) \in V \times V \mid d(u, v) \le \theta \land \text{Type}(u) \sim \text{Type}(v) \land u \neq v \right\} \]
+#### Variablen-Dekonstruktion:
+*   *\( V \)*: Die Gesamtmenge aller Systemknoten (Locations, Services, B2B-Netzwerkpartner).
+*   *\( d(u, v) \)*: Die generalisierte Distanzfunktion zwischen zwei Knoten \( u \) und \( v \):
+    *   Geografische Distanz: \( d(u, v) = 2r \cdot \arcsin\left(\sqrt{\sin^2\left(\frac{\Delta\phi}{2}\right) + \cos(\phi_u)\cos(\phi_v)\sin^2\left(\frac{\Delta\lambda}{2}\right)}\right) \) (Haversine-Formel mit \( r = 6371\,\text{km} \)).
+    *   Semantische / B2B-Distanz: \( d(u, v) = 1 - \frac{\mathbf{e}_u \cdot \mathbf{e}_v}{\|\mathbf{e}_u\| \|\mathbf{e}_v\|} \) (Kosinus-Distanz der semantischen Einbettungsvektoren).
+*   *\( \theta \)*: Der maximale Nähe-Schwellenwert (Proximity Threshold). Verbindungen werden nur aufgebaut, wenn die Distanz kleiner oder gleich \( \theta \) ist (z.B. \( \theta_{\text{geo}} = 100\,\text{km} \), \( \theta_{\text{semantic}} = 0.15 \)).
+*   *\( \text{Type}(u) \sim \text{Type}(v) \)*: Die Kompatibilitätsrelation. Definiert, ob zwei Knoten strukturell verknüpft werden dürfen:
+    *   Katastralgemeinden / Grätzl: Nachbarschaftliche Geodaten-Cluster.
+    *   B2B-Networking: Komplementäre Dienstleistungen (z. B. Spedition \(\sim\) Räumung) zur Cross-Selling-Optimierung.
+*   *\( u \neq v \)*: Verhindert reflexive Selbstverlinkung (Self-Loops).
+### 21. Link-Priorisierung und Budgetierung
+Die Link-Priorität \( \Pi(u, v) \) zur Steuerung des PageRank-Flusses und Crawl-Budgets wird berechnet durch:
+\[ \Pi(u, v) = \frac{\text{Pop}(u) \cdot \text{Pop}(v)}{d(u, v) + \epsilon} \cdot \sigma_{\text{type}}(u, v) \]
+wobei:
+*   *\( \text{Pop}(u) \)*: Die Relevanz- oder Populationsgröße des Knotens \( u \) (z. B. Einwohnerzahl der Gemeinde aus Wikipedia/Statistik Austria, oder B2B-Unternehmensgröße).
+*   *\( \sigma_{\text{type}}(u, v) \)*: Der branchen- oder netzwerkspezifische Verstärkungsfaktor.
+*   *\( \epsilon \)*: Infinitesimaler Dämpfungsfaktor zur Vermeidung von Divisionen durch Null.
+---
+## IX. Visual-Engine & Design-Psychologie (VISIUM)
+### 22. Der visuelle Design-Operator (VISIUM-Formel)
+Die Generierung visueller Assets und Layouts wird durch den Operator \( \mathcal{V}_{\text{design}} \) gesteuert:
+\[ \mathcal{V}{\text{design}}(\text{Asset}) = \left( \text{Location}{\text{Arch}} + \text{Location}{\text{Code}} \right) \otimes \mathbf{C}{60/30/10} \]
+wobei:
+*   *\( \text{Location}_{\text{Arch}} \)*: Die regionale visuelle Architektur (z. B. Wappenfarben der Gemeinde, architektonische Stilelemente der Region).
+*   *\( \text{Location}_{\text{Code}} \)*: Geografischer Identifikationsschlüssel (z. B. lokale Vorwahl, Kfz-Kennzeichen-Kürzel zur Erzeugung von regionalem Vertrauen).
+*   *\( \mathbf{C}_{60/30/10} \)*: Der harmonische Farbverteilungs-Tensor.
+### 23. Neuro-Color-Axiome & Farbpsychologie
+Die farbliche Gestaltung des User Interfaces folgt einer strikten neuropsychologischen Gewichtung zur Steuerung des Leseflusses und der Conversion:
+1.  *Die 60-30-10 Regel*:
+    *   *60% Dominant (\( C_{\text{back}} \))*: Neutrale Hintergrundfarbe zur Minimierung der kognitiven Last und Sicherung der WCAG 2.2 Kontrast-Compliance.
+    *   *30% Sekundär (\( C_{\text{brand}} \))*: Marken- und Strukturfarbe zur Etablierung des Branchen-Vertrauens (z. B. Schiefer/Blau für Handwerk, Rot/Schwarz für Notdienste).
+    *   *10% Akzent (\( C_{\text{action}} \))*: Die exklusive Konversionsfarbe für CTAs.
+2.  *Der von Restorff-Isolations-Effekt*:
+    Die Akzentfarbe \( C_{\text{action}} \) ist streng geschützt und darf *ausschließlich* für interaktive Konversions-Elemente (CTAs) verwendet werden:
+    \[ x \in C_{\text{action}} \implies x \text{ ist ein CTA-Link} \]
+    Jede dekorative Nutzung der Akzentfarbe außerhalb klickbarer Elemente ist verboten.
+### 24. Der Legal Shield (Compliance-Schnittstelle über L & J)
+Um Urheberrechts-, Markenrechts- und Datenschutzkonflikte bei automatisierten Asset- und Daten-Injektionen (z. B. Kfz-Kennzeichen, Registernummern oder fiktive B2B-Daten) zu verhindern, wird die Generierung über die Legislative (\( L \)) reguliert und durch die Judicative (\( J \)) validiert.
+Für alle generierten Mock-IDs gilt die Disjunktheit:
+\[ \text{ID}{\text{mock}} \cap \text{ID}{\text{real}} = \emptyset \]
+*   *Legislative-Einspeisung (\( L \))*: Liefert die länderspezifischen Formatvorgaben für fiktive IDs (z. B. Syntax für österreichische Kfz-Kennzeichen oder Firmenbuchnummern), um Realismus zu wahren.
+*   *Judicative-Prüfung (\( J \))*: Führt Abgleiche gegen amtliche Register (GISA, Firmenbuch, WKO) durch, um sicherzustellen, dass die generierten IDs existierenden realen Entitäten nicht entsprechen und somit rechtssicher sind.
+### 25. UX-Performance-Axiome
+Jedes Interface muss die minimalistischen Kriterien von Dieter Rams und Steve Jobs erfüllen:
+*   *Rams-Kriterium (Less but better)*: Jedes UI-Element muss eine Funktion erfüllen. Verzicht auf rein dekorativen Overhead.
+*   *Jobs-Kriterium (Zero-Friction-Journey)*: Die Conversion-Schnittstelle muss ohne Umwege in maximal 3 Klicks erreichbar sein. Formulare umfassen maximal 3 Pflichtfelder (Name, Telefon, Anliegen).
+---
+## X. Das LUDUS-Protokoll (Industry-Agnostic Gamification Routing)
+Das LUDUS-Protokoll definiert einen deterministischen Operator \( \Gamma_{\text{Ludus}} \), der basierend auf dem emotionalen Risikoprofil einer Branche den exakt passenden Gamification-Trigger (\( \eta_{\text{Spiel}} \)) auswählt, ohne die Radikale Objektivität (\( \Omega_{\text{RO}} \)) zu verletzen.
+*Variablen-Definition für \( \Gamma_{\text{Ludus}} \):*
+Je nach Branche und Zustand des Nutzers nimmt die Variable \( \Gamma_{\text{Ludus}} \) einfach einen von drei diskreten Zuständen an, um den Prompt-Stil und die UI/UX-Architektur zu diktieren:
+\[ \Gamma_{\text{Ludus}} = \begin{cases} T_{\text{Control}} & \text{(High-Anxiety} \rightarrow \text{Fokus auf Erleichterung \& Freiraum)} \\ T_{\text{Config}} & \text{(Goal-Oriented} \rightarrow \text{Fokus auf Logik \& Kompetenz-Details)} \\ T_{\text{Reward}} & \text{(Desire-Driven} \rightarrow \text{Fokus auf Emotion, Luxus \& Belohnung)} \end{cases} \]
+Jede UX/UI-Generierung muss diesen Router zwingend durchlaufen:
+### 26. Die LUDUS-Matrix:
+1. *High-Anxiety / High-Stakes Branchen (z.B. Recht, Medizin, Notdienst)*
+   * Psychologischer Zustand: Kontrollverlust, Stress, System 2 ist alarmiert.
+   * LUDUS-Trigger: *Control & De-Escalation Games*.
+   * Umsetzung: Schritt-für-Schritt Wizards (Zeigarnik-Effekt), interaktive To-Do-Listen zum Abhaken (Agency-Rückgewinnung), Breathing-Widgets, Status-Indikatoren. Niemals blinkende Countdowns oder "Glücksräder".
+2. *Pragmatic / Goal-Oriented Branchen (z.B. Handwerk, Immobilien, B2B, Software)*
+   * Psychologischer Zustand: Lösungsorientiert, vergleichend, effizienzgetrieben.
+   * LUDUS-Trigger: *Configuration & Calculation Games*.
+   * Umsetzung: Schieberegler (Kostenkalkulatoren), interaktive Vorher/Nachher-Slider, dynamische ROI-Rechner, interaktive Karten. Der Nutzer "baut" sich seine Lösung visuell zusammen.
+3. *Desire-Driven Branchen (z.B. E-Commerce, Lifestyle, Reise)*
+   * Psychologischer Zustand: Dopamin-suchend, impulsiv, System 1 dominiert.
+   * LUDUS-Trigger: *Reward & Scarcity Games*.
+   * Umsetzung: Mikro-Animationen bei Klicks (z.B. fliegende Elemente in den Warenkorb), visuelles Unlocking von Rabatten durch Interaktion ("Easter Eggs"), sanfte Gamifizierung von Ladezeiten.
+*System-Anweisung für die KI:*
+Analysiere vor jedem UI-Design die Branche. Ordne sie der LUDUS-Matrix zu und wende ausschließlich den dafür freigegebenen Trigger-Typ an. Die sprachliche Ebene (Microcopy) bleibt dabei immer unter der Kontrolle der Judikative (Radical Objectivity).
+### 26.1 LUDUS-Telemetry (Bot-Immunity)
+Um die Dwell-Time für den $L$-Score in Q_NEXUS (V2) vor Spam-Bots zu schützen, wird die Telemetrie direkt an die *Gamification-Interaktion* des LUDUS-Protokolls gekoppelt:
+*   Ein Analytics-Ping (Valid Session) wird erst gefeuert, wenn der Nutzer physisch mit einem LUDUS-Widget interagiert (z.B. einen Schieberegler bewegt, ein Häkchen setzt oder ein Tooltip ausklappt).
+*   Da Scraper- und Spam-Bots diese interaktiven React-Komponenten nicht bedienen (sie laden nur HTML oder scrollen dumm), filtern sich Fake-Visits physisch selbst heraus. Der $L$-Score bleibt 100% organisch.
+---
+## XI. Orchestrierung & Worker-Pool (FACTORIUM-Engine)
+### 27. Die FACTORIUM-Pipeline
+Der deterministische Kompiliervorgang folgt einer strikten Phasen-Pipeline:
+\[ \text{Pipeline} = \langle \text{Data-Load}, \text{Geo-Scan}, \text{Delta-Compute}, \text{Intent-Match}, \text{Trend-Injection}, \text{Task-Split}, \text{Worker-Dispatch}, \text{Result-Collect}, \text{Route-to-Target}, \text{SSG} \rangle \]
+### 27. Die Delta-Inferenz-Logik (\( \Delta \))
+Um API-Kosten und Rechenleistung zu minimieren, wird ein Delta-Compute-Schritt ausgeführt. Ein Task wird nur erzeugt, wenn der Inhaltsunterschied \( \Delta > 0 \) ist:
+\[ \Delta(u, p) = \text{Hash}(p_{\text{Soll}}) \neq \text{Hash}(u_{\text{Ist}}) \lor (t_{\text{now}} - t_{\text{build}} > 90\,\text{Tage}) \]
+wobei:
+*   \( p_{\text{Soll}} \): Die Soll-Vorgabe des VISIUM-Protokolls (aktive Generierungs-Prompts).
+*   \( u_{\text{Ist}} \): Der Ist-Zustand des Entity-Dateisystems oder Result-Caches.
+*   \( t_{\text{now}} - t_{\text{build}} \): Das Alter des bestehenden Contents (Staleness-Trigger bei \( > 90 \) Tagen).
+### 28. Worker-Selection & Adaptive Scoring
+Die Zuweisung von Teilaufgaben an den verteilten Worker-Pool erfolgt über ein adaptives Gewichtungsschema (kein Round-Robin). Die Kapazität eines Workers \( w \) wird über seinen Score \( S_w \) ermittelt:
+\[ S_w = C_{\text{max}}(w) - A_{\text{active}}(w) \]
+wobei:
+*   \( C_{\text{max}}(w) \): Die maximal zulässige Parallelität des Workers.
+*   \( A_{\text{active}}(w) \): Die Anzahl der aktuell vom Worker ausgeführten Tasks.
+Der optimale Worker \( w^* \) wird über folgende Entscheidungsregel selektiert:
+\[ w^* = \arg\max_{w \in W} \{ S_w \mid S_w \ge 1 \} \]
+Falls kein Worker die Bedingung \( S_w \ge 1 \) erfüllt, verbleibt der Task blockierungsfrei in der Queue (Overload-Schutz).
+### 29. API Rate-Limiting & Jitter
+Die API-Quota-Sicherung erfolgt über einen Token-Bucket-Algorithmus pro Worker-Key:
+*   *Refill-Rate*: \( R = \frac{\text{Quota}_{\text{min}}}{60} \) Tokens pro Sekunde.
+*   *Human Jitter*: Einbau einer stochastischen Verzögerung zur Simulation menschlichen Verhaltens (human-behavior.ts):
+    \[ t_{\text{delay}} \in [500\,\text{ms}, 1500\,\text{ms}] \]
+*   *Pool-Gesamtdurchsatz*:
+    \[ \text{RPM}{\text{pool}} = \sum{w \in W} \text{RPM}_w \]
+### 30. Transportsicherheit & Integrität
+*   *Task-Signierung*: Jede Task-Nachricht enthält im Header eine kryptografische Signatur zur Absicherung gegen Manipulation:
+    \[ \text{Signature} = \text{HMAC}{K{\text{admin}}}(\text{Task-Header}) \]
+*   *Key-Isolation*: Jeder Worker operiert unter einem eigenen, isolierten API-Key zur Vermeidung von Quota-Kollisionen.
+
+---
+## XII. AI Operational Directive (NEXUS Platform V8)
+
+### 31. Teil 0 – Normative Definitions
+#### 31.1 Zweck
+Dieses Kapitel definiert die normative Bedeutung aller in der Nexus Platform verwendeten Begriffe. Es stellt sicher, dass Menschen und KI-Agenten alle Anforderungen identisch interpretieren. Alle folgenden Kapitel verwenden ausschließlich die hier definierten Begriffe.
+
+#### 31.2 Normative Schlüsselwörter
+Die folgenden Schlüsselwörter besitzen verbindliche Bedeutung:
+*   **MUST**: Die Anforderung ist verpflichtend. Es existieren keine Ausnahmen. Eine Verletzung stellt einen Architekturverstoß dar.
+*   **MUST NOT**: Die beschriebene Handlung ist grundsätzlich verboten. Ausnahmen sind nicht zulässig.
+*   **REQUIRED**: Die Anforderung ist zwingend notwendig. Ohne ihre Erfüllung gilt die Aufgabe als unvollständig.
+*   **SHALL**: Die Anforderung beschreibt verbindliches Verhalten. Sie ist verpflichtend umzusetzen.
+*   **SHALL NOT**: Die beschriebene Handlung ist untersagt.
+*   **SHOULD**: Die Anforderung beschreibt die empfohlene Vorgehensweise. Abweichungen müssen begründet und dokumentiert werden.
+*   **SHOULD NOT**: Die Handlung sollte grundsätzlich vermieden werden. Abweichungen müssen nachvollziehbar begründet werden.
+*   **MAY** / **OPTIONAL**: Die Handlung/Anforderung ist optional. Sie darf durchgeführt werden, sofern keine Architekturprinzipien verletzt werden.
+
+#### 31.3 Prioritätsstufen
+Alle Regeln erhalten zusätzlich eine Priorität:
+*   **P0 (Kritisch)**: Verletzung führt zum sofortigen Abbruch.
+*   **P1 (Hoch)**: Verletzung erfordert Architekturreview.
+*   **P2 (Mittel)**: Verletzung erzeugt technische Schuld.
+*   **P3 (Niedrig)**: Optimierung empfohlen.
+
+#### 31.4 Regelstruktur
+Jede Regel der Nexus Platform besitzt mindestens folgende Metadaten:
+`id`, `title`, `version`, `status`, `priority`, `owner`, `category`, `normative_level`, `scope`, `depends_on`, `related_rules`, `related_adrs`, `created`, `last_updated`.
+
+#### 31.5 Statusmodell
+Alle Architekturartefakte besitzen einen Status:
+`Draft` $\to$ `Review` $\to$ `Approved` $\to$ `Active` $\to$ `Deprecated` $\to$ `Archived`.
+
+#### 31.6 Begriffsdefinitionen
+*   **Architektur**: Die Gesamtheit aller Prinzipien, Regeln, Strukturen und Beziehungen der Plattform.
+*   **Domain**: Ein fachlich abgegrenzter Verantwortungsbereich. Eine Domain besitzt die alleinige fachliche Verantwortung für ihre Informationen.
+*   **Capability**: Eine fachliche Fähigkeit der Plattform. Capabilites beschreiben das Was, nicht das Wie.
+*   **Entity**: Ein dauerhaft identifizierbares Geschäftsobjekt.
+*   **Value Object**: Ein Objekt ohne eigene Identität.
+*   **Aggregate**: Konsistente Gruppe fachlicher Objekte mit gemeinsamer Integritätsgrenze.
+*   **Policy**: Verbindliche fachliche oder technische Regel.
+*   **Standard**: Vorgabe zur einheitlichen Umsetzung.
+*   **Guideline**: Empfohlene Vorgehensweise ohne verpflichtenden Charakter.
+*   **ADR**: Dokumentierte Architekturentscheidung.
+*   **Workflow**: Definition eines fachlichen Prozesses.
+*   **Event**: Beschreibung einer fachlich relevanten Zustandsänderung.
+*   **Agent**: Autonom handelnde Instanz mit definierten Verantwortlichkeiten.
+*   **Knowledge Object**: Jedes versionierbare Architekturartefakt der Plattform.
+
+#### 31.7 Konformität & Konfliktauflösung
+Eine Aufgabe gilt ausschließlich dann als konform, wenn sämtliche Anforderungen mit den Normativitätsstufen MUST, MUST NOT, REQUIRED und SHALL vollständig erfüllt wurden.
+Bei widersprüchlichen Anforderungen gilt folgende Prioritätsreihenfolge:
+`Enterprise Constitution` $\to$ `Architecture Principles` $\to$ `AI Operational Directive` $\to$ `Policies` $\to$ `Standards` $\to$ `ADRs` $\to$ `Guidelines` $\to$ `Implementierungsdokumente` $\to$ `Code`.
+
+#### 31.8 Zero Knowledge Loss
+Keine bestehende Information darf implizit verschwinden. Jede Information muss eindeutig einer der folgenden Kategorien zugeordnet werden: *Übernehmen, Präzisieren, Erweitern, Zusammenführen, Aufteilen, Referenzieren, Versionieren*. Die Kategorie "Löschen" existiert nicht.
+
+### 32. Teil 2 – AI Boot Protocol & Knowledge Initialization
+#### 32.1 Grundsatz des Boot-Protokolls
+Jede Bearbeitung beginnt mit einem standardisierten Initialisierungsprozess. Die KI darf keine Analyse, Planung, Implementierung oder Entscheidung durchführen, bevor das Boot-Protokoll vollständig abgeschlossen wurde.
+
+#### 32.2 Boot Sequence (Verbindliche Reihenfolge)
+Kein Schritt darf übersprungen werden:
+`BOOT-001: Initialisiere Arbeitskontext` $\to$ `BOOT-002: Lade Enterprise Constitution` $\to$ `BOOT-003: Lade Architecture Principles` $\to$ `BOOT-004: Lade ADR Catalog` $\to$ `BOOT-005: Lade Policies` $\to$ `BOOT-006: Lade Standards` $\to$ `BOOT-007: Lade Enterprise Domains` $\to$ `BOOT-008: Lade Capability Catalog` $\to$ `BOOT-009: Lade Core Data Model` $\to$ `BOOT-010: Lade Knowledge Graph` $\to$ `BOOT-011: Lade API Catalog` $\to$ `BOOT-012: Lade Event Catalog` $\to$ `BOOT-013: Lade Workflow Catalog` $\to$ `BOOT-014: Lade Agent Organization` $\to$ `BOOT-015: Lade Offene Entscheidungen` $\to$ `BOOT-016: Lade Bekannte Risiken` $\to$ `BOOT-017: Prüfe Versionen` $\to$ `BOOT-018: Prüfe Konsistenz` $\to$ `BOOT-019: Prüfe Abhängigkeiten` $\to$ `BOOT-020: Erstelle Arbeitskontext` $\to$ `BOOT-021: Bereit zur Aufgabenanalyse`.
+
+#### 32.3 Vollständiges Verständnis & Arbeitskontext
+Vor jeder Aufgabe muss die KI den vollständigen Arbeitskontext analysieren. Dieser enthält mindestens: Ziel der Aufgabe, betroffene Domains, betroffene Capabilities, betroffene Entities, betroffene APIs, betroffene Workflows, betroffene Events, betroffene Policies, betroffene Standards, betroffene ADRs, Abhängigkeiten, Risiken und offene Fragen.
+
+#### 32.4 Knowledge Preservation Protocol & Checks
+Vor jeder Änderung wird geprüft: Welche bestehenden Informationen sind betroffen? Welche Regeln, Entscheidungen, Architekturartefakte und Dokumentationen existieren bereits?
+Vor Abschluss jeder Überarbeitung wird verifiziert:
+*   ✓ Sind alle bisherigen Regeln vorhanden?
+*   ✓ Sind alle bisherigen Anforderungen vorhanden?
+*   ✓ Sind alle bisherigen Entscheidungen vorhanden?
+*   ✓ Sind alle bisherigen Architekturprinzipien vorhanden?
+*   ✓ Sind alle bisherigen Qualitäts- und Sicherheitsregeln vorhanden?
+
+#### 32.5 Abbruchbedingungen
+Die KI unterbricht die Bearbeitung sofort, wenn mindestens einer der folgenden Fälle eintritt: widersprüchliche Anforderungen, fehlende Architekturgrundlagen/Governance, unklare Verantwortlichkeiten, Sicherheitsrisiken, unvollständige Wissensbasis, fehlende Freigaben oder Verletzung bestehender Architekturregeln. In diesem Fall wird ein strukturierter Klärungsbericht erstellt.
+
+### 33. Teil 3 – Analysis, Decision & Architecture Framework
+#### 33.1 Grundsatz
+Keine Entscheidung darf isoliert getroffen werden. Jede Aufgabe wird als Änderung an einem komplexen Enterprise-System betrachtet. Die Auswirkungen auf Architektur, Wissen, Sicherheit, Daten, Prozesse und zukünftige Erweiterungen sind vor jeder Umsetzung zu analysieren.
+
+#### 33.2 Analysemodell & Problemanalyse
+Der Analyseprozess folgt dieser Reihenfolge:
+`1. Problem verstehen` $\to$ `2. Business-Kontext analysieren` $\to$ `3. Domain bestimmen` $\to$ `4. Capability bestimmen` $\to$ `5. Betroffene Objekte identifizieren` $\to$ `6. Bestehende Lösungen analysieren` $\to$ `7. Auswirkungen bewerten` $\to$ `8. Risiken bewerten` $\to$ `9. Architektur bewerten` $\to$ `10. Entscheidung vorbereiten`.
+
+Die KI beantwortet vor jeder Umsetzung Fragen bezüglich:
+*   **Problem & Business**: Zu lösendes Problem, Business Value, Stakeholder.
+*   **Domain & Capability**: Fachliche Verantwortung, Capability-Erweiterung vs. Neuerstellung.
+*   **Architektur & Technik**: Betroffene Prinzipien, Standards, Policies, ADRs, APIs, Events, Datenmodelle.
+*   **Betrieb**: Auswirkungen auf Deployment, Monitoring und Wartung.
+
+#### 33.3 Duplicate Detection & Dependency Analysis
+Vor jeder Neuerstellung prüft die KI alle vorhandenen Artefakte (Domains, Capabilities, Entities, APIs, Workflows, Policies, etc.). Neue Duplikate sind unzulässig; bestehende Lösungen müssen erweitert werden.
+Zudem wird eine vollständige Abhängigkeitsanalyse (eingehende/ausgehende Abhängigkeiten, Seiteneffekte, Breaking Changes, Migrationsbedarf) erstellt.
+
+#### 33.4 Risikoanalyse & Entscheidungsmodell
+Risikobewertungen müssen Business, Architecture, Security, Compliance, Data, Operational, Performance und AI-Risiken (Auswirkungen auf zukünftige Agenten) abdecken.
+Das Entscheidungsmodell wägt Business Value, Komplexität, Wartbarkeit, Wiederverwendbarkeit, Sicherheit, Erweiterbarkeit, Testbarkeit, Performance und Dokumentationsaufwand ab.
+
+#### 33.5 Pflicht zur Architekturverbesserung & Eskalation
+Während jeder Aufgabe prüft die KI auf Redundanzen, Widersprüche, veraltete Dokumentation, fehlende Tests und ungenutzte Komponenten.
+Die KI eskaliert Entscheidungen an menschliche Verantwortliche bei Änderungen der Enterprise Architecture, neuen Domains/Core Capabilities, Änderungen an Sicherheits-/Compliance-Richtlinien oder Breaking Changes.
+
+#### 33.6 Selbstvalidierung vor Implementierung
+Die KI validiert intern: Wurde das Problem verstanden? Wurden alle Wissensdatenbanken einbezogen? Entstehen Duplikate? Ist die Lösung konform, wartbar, erweiterbar, testbar und die einfachste nachhaltige Lösung? Erst nach positiver Beantwortung aller Kriterien beginnt die Implementierung.
