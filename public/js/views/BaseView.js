@@ -48,4 +48,19 @@ export class BaseView {
     this.el?.remove();
     this.el = null;
   }
+
+  /**
+   * Escape HTML to prevent XSS from stored data.
+   * @param {string} str
+   * @returns {string}
+   */
+  _esc(str = '') {
+    if (str === null || str === undefined) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
 }

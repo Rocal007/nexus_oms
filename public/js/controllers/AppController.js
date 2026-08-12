@@ -3,7 +3,7 @@
  * Wires navigation, router, sub-controllers, and Auth guard.
  * Shows LoginView if not authenticated. Guards admin-only routes.
  */
-import { NavigationView }        from '../views/NavigationView.js';
+import { NavigationView }        from '../views/NavigationView.js?v=49';
 import { HomeDashboardView }     from '../views/HomeDashboardView.js';
 import { LoginView }             from '../views/LoginView.js';
 import { RouterController }      from './RouterController.js';
@@ -13,6 +13,9 @@ import { SettingsController }    from './SettingsController.js';
 import { UserController }        from './UserController.js';
 import { BrancheController }     from './BrancheController.js';
 import { GovernanceController }  from './GovernanceController.js';
+import { CompanyController }     from './CompanyController.js?v=49';
+import { PartnerController }     from './PartnerController.js?v=49';
+import { InvoiceController }     from './InvoiceController.js?v=49';
 import { OrderModel }            from '../models/OrderModel.js';
 import { DistributorModel }      from '../models/DistributorModel.js';
 import { BrancheModel }          from '../models/BrancheModel.js';
@@ -107,6 +110,9 @@ export class AppController {
     const userCtrl     = new UserController(this._contentEl);
     const brancheCtrl  = new BrancheController(this._contentEl, router);
     const govCtrl      = new GovernanceController(this._contentEl);
+    const companyCtrl  = new CompanyController(this._contentEl);
+    const partnerCtrl  = new PartnerController(this._contentEl, router);
+    const invoiceCtrl  = new InvoiceController(this._contentEl, router);
 
     // ── Route-Guard Helper ───────────────────────────────────
     const adminOnly = (handler) => (params) => {
@@ -163,7 +169,18 @@ export class AppController {
         return () => {
           if (activeCleanup) activeCleanup();
         };
-      }));
+      }))
+
+      // ── Multi-Firm / Betriebe ────────────────────────────
+      .register('/companies', adminOnly(() => companyCtrl.show()))
+
+      // ── Subunternehmer-Netzwerk ──────────────────────────
+      .register('/partners', adminOnly(() => partnerCtrl.showList()))
+      .register('/radar', adminOnly(() => partnerCtrl.showRadar()))
+
+      // ── Rechnungsbuch & Fast-Track ───────────────────────
+      .register('/invoices', adminOnly(() => invoiceCtrl.showList()))
+      .register('/fast-track', () => invoiceCtrl.showFastTrack());
 
     // Distributor startet immer auf /orders
     const startRoute = AuthStore.isAdmin() ? null : '/orders';

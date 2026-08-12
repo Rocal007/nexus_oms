@@ -7,6 +7,8 @@
 import { BaseView }  from './BaseView.js';
 import { ce }        from '../utils/DOMHelper.js';
 import { AuthStore } from '../store/AuthStore.js';
+import { CompanyModel } from '../models/CompanyModel.js?v=49';
+import { toast } from './ToastView.js';
 
 /**
  * @param {'admin'|'distributor'|null} role
@@ -18,8 +20,10 @@ function getNavItems(role) {
 
   if (admin) {
     items.push({ icon: '📊', label: 'Dashboard', route: '#/' });
+    items.push({ icon: '🏢', label: 'Betriebe (Holding)', route: '#/companies' });
     items.push({ icon: '🏷️', label: 'Branchen', route: '#/branche' });
-    items.push({ icon: '🏭', label: 'Distributoren', route: '#/distributors' });
+    items.push({ icon: '👥', label: 'Subunternehmer', route: '#/partners' });
+    items.push({ icon: '📡', label: 'Kapazitäten-Radar', route: '#/radar' });
     items.push({ icon: '🏛️', label: 'Governance', route: '#/governance' });
   }
 
@@ -31,6 +35,12 @@ function getNavItems(role) {
       ...(admin ? [{ icon: '📬', label: 'Posteingang',       route: '#/orders/inbox', id: 'nav-inbox' }] : []),
     ],
   });
+
+  if (admin) {
+    items.push({ icon: '🧾', label: 'Rechnungsbuch', route: '#/invoices' });
+  }
+
+  items.push({ icon: '⚡', label: 'Fast-Track Baustelle', route: '#/fast-track' });
 
   if (admin) {
     items.push({ icon: '👥', label: 'Benutzer', route: '#/users' });
@@ -70,9 +80,30 @@ export class NavigationView extends BaseView {
     const role = user?.role ?? null;
 
     // ── Brand ────────────────────────────────────────────────
+    const companies = CompanyModel.getAll();
+    const activeId = CompanyModel.getActiveId();
+    const dropdown = ce('select', {
+      className: 'form__control',
+      'style.fontSize': '12px',
+      'style.marginTop': '8px',
+      'style.background': '#161F30',
+      'style.borderColor': 'rgba(255,255,255,0.05)',
+      'style.color': '#FFF'
+    }, companies.map(c => ce('option', { value: String(c.id), textContent: c.name, ...(c.id === activeId ? { selected: 'true' } : {}) })));
+
+    dropdown.addEventListener('change', (e) => {
+      const compId = Number(e.target.value);
+      CompanyModel.setActiveId(compId);
+      const activeColor = CompanyModel.getById(compId)?.branding_color || '#2563EB';
+      document.documentElement.style.setProperty('--accent-teal', activeColor);
+      toast.show(`Arbeitskontext gewechselt: ${CompanyModel.getById(compId)?.name}`, 'success');
+      window.location.reload();
+    });
+
     const brand = ce('div', { className: 'nav-brand' }, [
       ce('div', { className: 'nav-brand__logo',     textContent: 'NEXUS-OMS' }),
       ce('div', { className: 'nav-brand__subtitle', textContent: 'Order Management' }),
+      dropdown
     ]);
 
     // ── Menu ─────────────────────────────────────────────────
